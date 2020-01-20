@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/20 16:24:58 by cmorel-a          #+#    #+#             */
+/*   Updated: 2020/01/20 16:26:09 by cmorel-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
-#include <stdio.h>
 
 int		ft_type_file(const char *file, const char *type)
 {
@@ -28,7 +39,6 @@ int		player_init_posit(char c)
 		return (1);
 	return (0);
 }
-
 
 int		check_char_map(char c)
 {

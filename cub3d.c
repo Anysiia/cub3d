@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:08:47 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/20 12:30:33 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/20 15:50:37 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 #include <mlx.h>
 #include <stdio.h>
 
-static int	exit_with_error(const char *str)
+void	error_config(const char *msg)
 {
-	if (str)
-		write(1, str, ft_strlen(str));
-	return (0);
+	if (msg)
+		write(1, msg, ft_strlen(msg));
+	write(1, "\n", 1);
+	exit(0);
 }
 
 int		main(int ac, char **av)
@@ -30,19 +31,19 @@ int		main(int ac, char **av)
 	if (!check_arg(ac, av, save))
 		return (0);
 	if (read_cub(av[1], &config) == -1)
-		return (exit_with_error("Error:\nInvalid config of .cub file\n"));
+		error_config("Error:\nInvalid config of .cub file");
 	return (0);
 }
 
 int		check_arg(int ac, char **av, int save)
 {
 	if (ac < 2)
-		return (exit_with_error("Error:\nNo map indicated\n"));
+		error_config("Error:\nNo map indicated");
 	if (ac == 3 && save == 0)
-		return (exit_with_error("Error:\nSecond argument is not --save.\n"));
+		error_config("Error:\nSecond argument is not --save.");
 	if (ac > 3)
-		return (exit_with_error("Error:\nToo many arguments.\n"));
+		error_config("Error:\nToo many arguments.");
 	if ((ft_type_file(av[1], ".cub")) == 0)
-		return (exit_with_error("Error:\nMap file is not a .cub file.\n"));
+		error_config("Error:\nMap file is not a .cub file.");
 	return (1);
 }

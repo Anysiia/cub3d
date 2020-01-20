@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
+/*   Updated: 2020/01/20 16:24:33 by cmorel-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <mlx.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <mlx.h>
 
 # define NB_TEX	5
 # define TEX_NO	0
@@ -41,12 +53,14 @@ typedef struct	s_config
 }				t_config;
 
 int				check_arg(int ac, char **av, int save);
+void			error_config(const char *msg);
 int				read_cub(const char *cub, t_config *config);
-int				parse_config(char *line, t_config *config);
-int				parse_map(const char *line, t_config *config, int height_map);
-int				resolution(char *line, t_config *config);
-int				color(char *line, t_config *config, char c);
-int				texture_path(char *line, t_config *config, char c, char d);
+void			parse_config(char *line, t_config *config);
+int				read_map(const char *line, t_config *config, int height_map);
+int				copy_map(char *line, t_config *config, int fd);
+void			resolution(char *line, t_config *config);
+void			color(char *line, t_config *config, char c);
+void			texture_path(char *line, t_config *config, char c, char d);
 
 int				get_next_line(int fd, char **line);
 

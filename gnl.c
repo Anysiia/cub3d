@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:55:30 by cmorel-a          #+#    #+#             */
-/*   Updated: 2019/11/27 09:57:00 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/20 16:28:00 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ int				get_next_line(int fd, char **line)
 	while (cmpt(s) == -1)
 	{
 		if (!(*line = join_to_char(*line, s, '\n')))
-			return ( -1);
-			ft_bzero(s, 129);
+			return (-1);
+		ft_bzero(s, 129);
 		ret = read(fd, s, 128);
 		if (ret <= 0)
 			return (ret);
 	}
-	if (!(*line = join_to_char(*line, s ,'\n')))
+	if (!(*line = join_to_char(*line, s, '\n')))
 		return (-1);
 	ft_strlcpy(s, (s + cmpt(s) + 1), 128);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:37:30 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/20 13:56:07 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/20 16:15:57 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	rgb_color(int r, int g, int b)
 	return (rgb);
 }
 
-int		color(char *line, t_config *config, char c)
+void		color(char *line, t_config *config, char c)
 {
 	int	rgb;
 	int	r;
@@ -63,18 +63,17 @@ int		color(char *line, t_config *config, char c)
 
 	i = 1;
 	if (!check_color_line(line, c))
-		return (-1);
+		error_config("Error:\nWrong format color");
 	while (line[i] == ' ')
 		i++;
 	r = one_color(line, &i);
 	g = one_color(line, &i);
 	b = one_color(line, &i);
 	if (r < 0 || g < 0 || b < 0)
-		return (-1);
+		error_config("Error:\nR, G and B color must be between 0 and 255");
 	rgb = rgb_color(r, g, b);
 	if (c == 'F')
 		config->floor = rgb;
 	if (c == 'C')
 		config->ceiling = rgb;
-	return (1);
 }

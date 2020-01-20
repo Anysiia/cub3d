@@ -1,5 +1,16 @@
-#include "../cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/20 15:11:48 by cmorel-a          #+#    #+#             */
+/*   Updated: 2020/01/20 15:47:26 by cmorel-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../cub3d.h"
 
 static int	len_without_space(char *line)
 {
@@ -49,31 +60,6 @@ static int	line_copy(char *line, t_config *config, int index)
 	return (1);
 }
 
-static int	copy_map(char *line, t_config *config, int fd)
-{
-	int		len_line;
-	int		ret;
-
-	len_line = 1;
-	line_copy(line, config, 0);
-	free(line);
-	while ((ret = get_next_line(fd, &line)) >= 0)
-	{
-		if ((line_copy(line, config, len_line)) == -1)
-		{
-			free(line);
-			return (-1);
-		}
-		free(line);
-		len_line++;
-		if (ret == 0)
-			break;
-	}
-	config->map->map[len_line][0] = '\0';
-	config->map->height = len_line -1;
-	return (1);
-}
-
 /*static int	check_top_and_bottom_map(t_config *config)
 {
 	int		i;
@@ -96,34 +82,29 @@ static int	copy_map(char *line, t_config *config, int fd)
 	}
 	i = 0;
 	return (1);
-}
-*/
+}*/
 
-int				parse_map(const char *cub, t_config *config, int height)
+int			copy_map(char *line, t_config *config, int fd)
 {
-	int		fd;
-	char	*line;
+	int		len_line;
+	int		ret;
 
-	if (!(config->map->map = (char **)malloc(sizeof(char *) * (height + 1))))
-		return (-1);
-	if ((fd = open(cub, O_RDONLY)) == -1)
-		return (-1);
-	while ((get_next_line(fd, &line)) == 1 
-			&& (line[0] != '1' || line[0] != ' '))
-		free(line);
-	if ((get_next_line(fd, &line)) == 1)
+	len_line = 1;
+	line_copy(line, config, 0);
+	free(line);
+	while ((ret = get_next_line(fd, &line)) >= 0)
 	{
-		if (line[0] == '1' || line[0] == ' ')
-		{
-			if (!(copy_map(line, config, fd)))
-				return (-1);
-		}
-		else
+		if ((line_copy(line, config, len_line)) == -1)
 		{
 			free(line);
 			return (-1);
 		}
+		free(line);
+		len_line++;
+		if (ret == 0)
+			break;
 	}
-	close(fd);
+	config->map->map[len_line][0] = '\0';
+	config->map->height = len_line -1;
 	return (1);
 }

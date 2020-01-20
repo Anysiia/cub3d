@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   resolution.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/20 15:56:11 by cmorel-a          #+#    #+#             */
+/*   Updated: 2020/01/20 16:21:05 by cmorel-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 static int	check_resolution_line(char *str)
@@ -38,13 +50,13 @@ static int	get_number(char *str, int start)
 	return (resolution);
 }
 
-int		resolution(char *line, t_config *config)
+void		resolution(char *line, t_config *config)
 {
-	int	i;
-	int	res;
-	
+	int		i;
+	int		res;
+
 	if (!check_resolution_line(line))
-		return (-1);
+		error_config("Error:\nWrong resolution");
 	i = 1;
 	while (line[i] == ' ')
 		i++;
@@ -58,6 +70,4 @@ int		resolution(char *line, t_config *config)
 	res = get_number(line, i);
 	res = (res > 1440 ? 1440 : res);
 	config->height = res;
-	return (1);
 }
-
