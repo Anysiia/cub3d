@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:08:47 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/20 15:50:37 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:13:22 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ int		main(int ac, char **av)
 	t_config	config;
 	
 	save = (ac == 3 && !ft_strcmp(av[2], "--save"));
-	if (!check_arg(ac, av, save))
-		return (0);
-	if (read_cub(av[1], &config) == -1)
-		error_config("Error:\nInvalid config of .cub file");
+	check_arg(ac, av, save);
+	map_read_cub(av[1], &config);
 	return (0);
 }
 

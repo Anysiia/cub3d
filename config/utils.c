@@ -6,11 +6,11 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:24:58 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/20 16:26:09 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:16:48 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int		ft_type_file(const char *file, const char *type)
 {
@@ -33,16 +33,27 @@ int		ft_type_file(const char *file, const char *type)
 	return (1);
 }
 
-int		player_init_posit(char c)
+int		len_to_no_one(char *str)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
+	int		i;
+
+	i = ft_strlen(str);
+	i--;
+	while (str[i] == '1')
+		i--;
+	return (i);
 }
 
-int		check_char_map(char c)
+int		test_set(char c, char *charset)
 {
-	if (c == '1' || c == '2' || c == '0' || (player_init_posit(c) == 1))
-		return (1);
+	int		i;
+
+	i = 0;
+	while (charset[i])
+	{
+		if (charset[i] == c)
+			return (1);
+		i++;
+	}
 	return (0);
 }

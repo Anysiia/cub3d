@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/20 16:24:33 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:26:13 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,36 @@ typedef struct	s_map
 	int			height;
 }				t_map;
 
+typedef struct	s_player
+{
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		move_speed;
+	double		rotate_speed;
+}				t_player;
+
 typedef struct	s_config
 {
-	int		width;
-	int		height;
-	char	*path_tex[NB_TEX];
-	int		floor;
-	int		ceiling;
-	t_map	*map;
+	int			width;
+	int			height;
+	char		*path_tex[NB_TEX];
+	int			color[NB_TEX];;
+	int			floor;
+	int			ceiling;
+	int			map_found;
+	t_map		*map;
+	t_player	player;
 }				t_config;
 
 int				check_arg(int ac, char **av, int save);
 void			error_config(const char *msg);
-int				read_cub(const char *cub, t_config *config);
-void			parse_config(char *line, t_config *config);
-int				read_map(const char *line, t_config *config, int height_map);
-int				copy_map(char *line, t_config *config, int fd);
+void			free_error(char *line, const char *msg);
+void			read_cub(const char *cub, t_config *config);
+char			*map_read_cub(const char *cub, t_config *config);
+void			config_map(char *line, t_config *config, char **map, int res);
+void			map_save(char *line, char *map, t_config *config, int res);
 void			resolution(char *line, t_config *config);
 void			color(char *line, t_config *config, char c);
 void			texture_path(char *line, t_config *config, char c, char d);
@@ -77,7 +91,7 @@ char			**ft_split(const char *s, char c);
 int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 int				ft_type_file(const char *file, const char *type);
-int				player_init_posit(char c);
-int				check_char_map(char c);
+int				len_to_no_one(char *str);
+int				test_set(char c, char *charset);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:11:53 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/20 16:29:36 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/21 12:43:56 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,19 @@ static int	path_size(char *str)
 	return (len);
 }
 
-static void	check_path_file(char *file)
+static int	check_path_file(char *file)
 {
 /*	int		fd;*/
 
 	if (!ft_type_file(file, ".xpm"))
-		error_config("Error:\nTexture file is not .xpm");
+		return (-1);
 /*	if ((fd = open(file, O_RDONLY)) == -1)
 	{
 		close(fd);
-		error_config("Error:\nCannot read texture file");
+		return (-1);
 	}
 	close(fd);*/
+	return (1);
 }
 
 void		texture_path(char *str, t_config *config, char c, char d)
@@ -71,13 +72,14 @@ void		texture_path(char *str, t_config *config, char c, char d)
 	int		i;
 
 	if (!check_path_format(str))
-		error_config("Error:\nBad path format");
+		free_error(str, "Error:\nBad path format");
 	i = (str[1] == ' ') ? 2 : 3;
 	while (str[i] == ' ')
 		i++;
 	if (!(path = ft_substr(str, i, path_size(str))))
-		error_config("Error:\nError on malloc path texture or sprite");
-	check_path_file(path);
+		free_error(str, "Error:\nError on malloc path texture or sprite");
+	if (check_path_file(path) == -1)
+		free_error(str, "Error:\nTexture file error");
 	if (c == 'N' && d == 'O')
 		config->path_tex[TEX_NO] = path;
 	if (c == 'S' && d == 'O')

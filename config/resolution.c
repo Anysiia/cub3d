@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:56:11 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/20 16:21:05 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/22 13:34:06 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		resolution(char *line, t_config *config)
 	int		res;
 
 	if (!check_resolution_line(line))
-		error_config("Error:\nWrong resolution");
+		free_error(line, "Error:\nWrong resolution");
 	i = 1;
 	while (line[i] == ' ')
 		i++;
