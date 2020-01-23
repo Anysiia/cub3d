@@ -6,21 +6,11 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:08:47 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/22 16:13:22 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:27:29 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <mlx.h>
-#include <stdio.h>
-
-void	error_config(const char *msg)
-{
-	if (msg)
-		write(1, msg, ft_strlen(msg));
-	write(1, "\n", 1);
-	exit(0);
-}
 
 int		main(int ac, char **av)
 {

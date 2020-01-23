@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:24:58 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/22 16:16:48 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:03:39 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,31 @@ int		ft_type_file(const char *file, const char *type)
 		if (file[i++] != type[j++])
 			return (0);
 	return (1);
+}
+
+char	*ft_free_1_join(char *s1, char const *s2)
+{
+	int		len;
+	int		i;
+	char	*str;
+
+	if (!s1 || !s2)
+		return (NULL);
+	i = ft_strlen(s1);
+	len = ft_strlen(s2);
+	len += i;
+	i = 0;
+	if (!(str = (char *)malloc(sizeof(*str) * (len + 1))))
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		str[i] = s1[i];
+	len = -1;
+	while (s2[++len])
+		str[i + len] = s2[len];
+	str[i + len] = '\0';
+	free(s1);
+	return (str);
 }
 
 int		len_to_no_one(char *str)
