@@ -6,7 +6,7 @@
 #    By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 09:57:43 by cmorel-a          #+#    #+#              #
-#    Updated: 2020/01/22 16:24:08 by cmorel-a         ###   ########.fr        #
+#    Updated: 2020/01/30 12:39:49 by cmorel-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,11 @@ INCLUDE = 	-I ./include -I $(MLX_PATH)
 LIBFT_DIR =	libft/
 
 SRCS =		cub3d.c \
+			config/init_config.c \
 			config/color.c \
 			config/parse_cub.c \
 			config/map.c \
+			config/player.c \
 			config/resolution.c \
 			config/texture.c \
 			config/utils.c \

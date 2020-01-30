@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:11:53 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/21 12:43:56 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/30 12:20:52 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ void		texture_path(char *str, t_config *config, char c, char d)
 	int		i;
 
 	if (!check_path_format(str))
-		free_error(str, "Error:\nBad path format");
+		exit_error("Error:\nBad path format");
 	i = (str[1] == ' ') ? 2 : 3;
 	while (str[i] == ' ')
 		i++;
 	if (!(path = ft_substr(str, i, path_size(str))))
-		free_error(str, "Error:\nError on malloc path texture or sprite");
+		exit_error("Error:\nError on malloc path texture or sprite");
 	if (check_path_file(path) == -1)
-		free_error(str, "Error:\nTexture file error");
+		exit_error("Error:\nTexture file error");
 	if (c == 'N' && d == 'O')
 		config->path_tex[TEX_NO] = path;
 	if (c == 'S' && d == 'O')

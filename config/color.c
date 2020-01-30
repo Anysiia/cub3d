@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:37:30 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/21 12:45:00 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/30 12:20:00 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ void		color(char *line, t_config *config, char c)
 
 	i = 1;
 	if (!check_color_line(line, c))
-		free_error(line, "Error:\nWrong format color");
+		exit_error("Error:\nWrong format color");
 	while (line[i] == ' ')
 		i++;
 	r = one_color(line, &i);
 	g = one_color(line, &i);
 	b = one_color(line, &i);
 	if (r < 0 || g < 0 || b < 0)
-		free_error(line, "Error:\nR, G and B color must be between 0 and 255");
+		exit_error("Error:\nR, G and B color must be between 0 and 255");
 	rgb = rgb_color(r, g, b);
 	if (c == 'F')
 		config->floor = rgb;

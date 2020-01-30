@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:24:58 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/23 11:03:39 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/27 10:56:59 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_type_file(const char *file, const char *type)
 	return (1);
 }
 
-char	*ft_free_1_join(char *s1, char const *s2)
+char	*ft_free_s1_join(char *s1, char const *s2)
 {
 	int		len;
 	int		i;

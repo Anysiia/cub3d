@@ -1,0 +1,15 @@
+R 400 80
+NO ./text_nord.xpm
+SO ./text_sud.xpm
+WE ./text_ouest.xpm
+EA ./text_est.xpm
+S ./text_sprite.xpm
+F 135,206,250
+C 230,255,230
+
+1 1 1 1 1 1 1 1 1
+1 0 0 0 0 0 1
+1 1 1 0 0 2 0 1
+1 0 0 W 1 1 1 0 1
+1 0 0 0 0 0 0 0 1
+1 1 1 1 1 1 1 1 1
