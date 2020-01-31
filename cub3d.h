@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/30 13:29:21 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/31 15:37:27 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,25 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
 # include "mlx.h"
 # include "libft/libft.h"
 
-# define NB_TEX	5
-# define TEX_NO	0
-# define TEX_SO	1
-# define TEX_WE	2
-# define TEX_EA	3
-# define TEX_S	4
+# define ESC		53
+# define LEFT		0
+# define BACKWARD	1
+# define FORWARD	13
+# define RIGHT		2
+# define CAM_LEFT	123
+# define CAM_RIGHT	124
+# define CLIC		1
+
+# define NB_TEX		5
+# define TEX_NO		0
+# define TEX_SO		1
+# define TEX_WE		2
+# define TEX_EA		3
+# define TEX_S		4
 
 typedef struct	s_texture
 {
@@ -35,6 +45,30 @@ typedef struct	s_texture
 	void		*img_ptr;
 	char		*data;
 }				t_texture;
+
+typedef struct	s_ray
+{
+	double		camera_x;
+	int			stripe;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	int			map_x;
+	int			map_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_x;
+	double		delta_y;
+	double		distance;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	int			line_height;
+	int			draw_start;
+	int			draw_stop;
+	int			camera_height;
+	double		*img_buff;
+}				t_ray;
 
 typedef struct	s_map
 {
@@ -58,6 +92,8 @@ typedef struct	s_player
 
 typedef struct	s_config
 {
+	void		*init;
+	void		*window;
 	int			save;
 	int			width;
 	int			height;
@@ -80,6 +116,16 @@ void			find_player(t_config *config);
 void			resolution(char *line, t_config *config);
 void			color(char *line, t_config *config, char c);
 void			texture_path(char *line, t_config *config, char c, char d);
+
+int				raycaster(t_config *config);
+void			side(t_ray *ray, t_config *config);
+void			dist_and_height(t_ray *ray, t_player *player, t_config *config);
+void			move_forward(t_config *config);
+void			move_backward(t_config *config);
+void			move_left(t_config *config);
+void			move_right(t_config *config);
+void			turn_right(t_config *config);
+void			turn_left(t_config *config);
 
 int				get_next_line(int fd, char **line);
 char			*ft_free_s1_join(char *s1, const char *s2);

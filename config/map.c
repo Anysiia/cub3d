@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 12:25:52 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/30 12:56:20 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/31 10:04:56 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void		map_validity(t_config *config)
 		if (config->map->map[0][i++] != '1')
 			exit_error("Error:\nMap must be close by walls");
 	i = 0;
-	while (config->map->map[config->map->height -1][i] != '\0')
+	while (config->map->map[config->map->height - 1][i] != '\0')
 		if (config->map->map[config->map->height - 1][i++] != '1')
 			exit_error("Error:\nMap must be close by walls");
 	i = 1;

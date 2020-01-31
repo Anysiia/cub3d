@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 10:26:13 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/30 16:17:57 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/01/31 10:05:39 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		set_player(t_config *config, int i, int j, char c)
 	}
 }
 
-void	find_player(t_config *config)
+void			find_player(t_config *config)
 {
 	int		i;
 	int		j;
