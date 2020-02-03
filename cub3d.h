@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/31 15:37:27 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/03 15:15:28 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,16 @@ typedef struct	s_ray
 	double		*img_buff;
 }				t_ray;
 
+typedef struct	s_keyboard
+{
+	int			left;
+	int			right;
+	int			backward;
+	int			forward;
+	int			cam_left;
+	int			cam_right;
+}				t_keyboard;
+
 typedef struct	s_map
 {
 	char		**map;
@@ -105,11 +115,13 @@ typedef struct	s_config
 	int			empty_line;
 	t_map		*map;
 	t_player	*player;
+	t_keyboard	*keyboard;
 }				t_config;
 
 t_config		*init_config(void);
 int				check_arg(int ac, char **av, int save);
 void			exit_error(const char *msg);
+void			quit(t_config *config, const char *msg);
 char			*map_read_cub(const char *cub, t_config *config);
 int				map_format(t_config *config, char *strmap);
 void			find_player(t_config *config);
@@ -126,6 +138,9 @@ void			move_left(t_config *config);
 void			move_right(t_config *config);
 void			turn_right(t_config *config);
 void			turn_left(t_config *config);
+int				keyboard_manager(t_config *config);
+int				key_pressed(int key, void *param);
+int				key_released(int key, void *param);
 
 int				get_next_line(int fd, char **line);
 char			*ft_free_s1_join(char *s1, const char *s2);

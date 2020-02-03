@@ -6,7 +6,7 @@
 #    By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 09:57:43 by cmorel-a          #+#    #+#              #
-#    Updated: 2020/01/31 15:38:00 by cmorel-a         ###   ########.fr        #
+#    Updated: 2020/02/03 15:33:38 by cmorel-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,9 @@ SRCS =		cub3d.c \
 			config/texture.c \
 			config/utils.c \
 			engine/move_player.c \
+			engine/key_event.c \
 			engine/raycaster.c \
-			engine/rotate_cam.c \
-			engine/utils_caster.c \
-			gnl.c
+			engine/utils_caster.c
 
 OBJS = 		${SRCS:.c=.o}
 

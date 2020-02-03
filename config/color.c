@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:37:30 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/30 12:20:00 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/03 14:53:48 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,25 @@
 static int	check_color_line(char *str, char c)
 {
 	int		i;
+	int		j;
 
 	if (!str || str[0] != c)
 		return (0);
 	i = 1;
+	j = 0;
 	while (str[i] == ' ')
 		i++;
 	while (ft_isdigit(str[i]) || str[i] == ',')
+	{
+		if (str[i] == ',')
+			j++;
 		i++;
+	}
 	while (str[i] == ' ')
 		i++;
 	if (str[i] != '\0')
+		return (0);
+	if (j != 2)
 		return (0);
 	return (1);
 }
