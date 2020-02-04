@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:11:53 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/30 12:20:52 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/03 16:42:35 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@ static int	check_path_file(char *file)
 	return (1);
 }
 
+static int	path_to_image(t_texture *texture)
+{
+
+
+
+
+}
+
 void		texture_path(char *str, t_config *config, char c, char d)
 {
 	char	*path;
@@ -89,5 +97,5 @@ void		texture_path(char *str, t_config *config, char c, char d)
 	if (c == 'E' && d == 'A')
 		config->path_tex[TEX_EA] = path;
 	if (c == 'S' && d == ' ')
-		config->path_tex[TEX_S] = path;
+		config->path_tex[4] = path;
 }
