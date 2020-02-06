@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/04 13:52:14 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/06 13:45:29 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define RIGHT		2
 # define CAM_LEFT	123
 # define CAM_RIGHT	124
-# define CLIC		1
 
 # define NB_TEX		4
 # define TEX_NO		0
@@ -43,7 +42,6 @@ typedef struct	s_texture
 	int			endian;
 	void		*img_ptr;
 	char		*data;
-	int			no_text;
 }				t_texture;
 
 typedef struct	s_sprite
@@ -136,7 +134,7 @@ t_config		*init_config(void);
 int				check_arg(int ac, char **av, int save);
 void			exit_error(const char *msg);
 void			quit(t_config *config, const char *msg);
-void			check_config(t_config *config);
+void			init_game(t_config *config);
 char			*map_read_cub(const char *cub, t_config *config);
 int				map_format(t_config *config, char *strmap);
 void			find_player(t_config *config);
@@ -154,10 +152,10 @@ void			move_right(t_config *config);
 void			turn_right(t_config *config);
 void			turn_left(t_config *config);
 int				keyboard_manager(t_config *config);
-int				key_pressed(int key, void *param);
-int				key_released(int key, void *param);
-int				leave_window(int key, void *param);
-int				loop(void *param);
+int				key_pressed(int key, t_config *config);
+int				key_released(int key, t_config *config);
+int				leave_window(t_config *config);
+int				loop(t_config *config);
 
 int				get_next_line(int fd, char **line);
 char			*ft_free_s1_join(char *s1, const char *s2);

@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 12:25:52 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/31 10:04:56 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/06 15:04:07 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static int		create_map(t_config *config)
 	int		j;
 	char	**map;
 
-	if (!(map = (char **)malloc(sizeof(char *) * config->map->height)))
+	if (!(map = (char **)malloc(sizeof(char *) * config->map->height + 1)))
 		exit_error("Error:\nCannot malloc map");
 	i = 0;
-	j = config->map->width + 1;
-	while (i < config->map->height)
+	j = config->map->width + 2;
+	while (i < config->map->height + 1)
 	{
 		if (!(map[i] = (char *)malloc(sizeof(char *) * j)))
 		{

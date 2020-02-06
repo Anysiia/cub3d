@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:23:45 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/30 12:38:11 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/06 11:06:11 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	config_map(char *line, t_config *config, char **map)
 	if (line[0] == 'R')
 		resolution(line, config);
 	if (line[0] == 'N' && line[1] == 'O')
-		texture_path(line, config, 'N', '0');
+		texture_path(line, config, 'N', 'O');
 	if (line[0] == 'S' && line[1] == 'O')
 		texture_path(line, config, 'S', 'O');
 	if (line[0] == 'W' && line[1] == 'E')

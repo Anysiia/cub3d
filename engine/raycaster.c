@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 11:49:59 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/31 14:25:05 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/06 13:53:21 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void		ray_values(t_config *config, t_ray *ray, t_player *player)
 	ray->map_y = (int)player->pos_y;
 	ray->delta_x = fabs(1 / ray->ray_dir_x);
 	ray->delta_y = fabs(1 / ray->ray_dir_y);
+	ray->hit = 0;
 }
 
 static void		step(t_ray *ray, t_player *player)
@@ -38,12 +39,41 @@ static void		step(t_ray *ray, t_player *player)
 	if (ray->ray_dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->side_dist_y = (player->pos_y - ray->map_y)* ray->delta_y;
+		ray->side_dist_y = (player->pos_y - ray->map_y) * ray->delta_y;
 	}
 	else
 	{
 		ray->step_y = 1;
 		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_y;
+	}
+}
+
+static void		colorisation(t_config *config, t_ray *ray)
+{
+	int		i;
+
+	i = 0;
+	while (i < ray->draw_start && i < (config->height / 2))
+	{
+		mlx_pixel_put(config->init, config->window, ray->stripe, i, config->ceiling);
+		i++;
+	}
+	while (i < ray->draw_stop)
+	{
+		if (ray->side == 0)
+			mlx_pixel_put(config->init, config->window, ray->stripe, i, 16711680);
+		if (ray->side == 1)
+			mlx_pixel_put(config->init, config->window, ray->stripe, i, 255);
+		if (ray->side == 2)
+			mlx_pixel_put(config->init, config->window, ray->stripe, i, 16776960);
+		if (ray->side == 3)
+			mlx_pixel_put(config->init, config->window, ray->stripe, i, 52224);
+		i++;
+	}
+	while (i < config->height -1 && i >= (config->height /2))
+	{
+		mlx_pixel_put(config->init, config->window, ray->stripe, i, config->floor);
+		i++;
 	}
 }
 
@@ -57,8 +87,9 @@ static void		stripe_caster(t_config *config, t_ray *ray)
 	side(ray, config);
 	dist_and_height(ray, player, config);
 	ray->img_buff[ray->stripe] = ray->distance;
+	colorisation(config, ray);
+	ray->stripe++;
 //	put_texture(ray, config);
-	ray->stripe += 1;
 }
 
 int				raycaster(t_config *config)

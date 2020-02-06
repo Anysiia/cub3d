@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:06:54 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/04 13:56:24 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/06 13:58:39 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,31 @@ static void	init_texture_and_sprite(t_config *config)
 		ft_bzero(config->texture[i], sizeof(t_texture));
 		i++;
 	}
-	config->texture[TEX_NO]->no_text = 16763135;
-	config->texture[TEX_SO]->no_text = 13158655;
-	config->texture[TEX_WE]->no_text = 13158600;
-	config->texture[TEX_EA]->no_text = 15124710;
 	if (!(config->sprite = malloc(sizeof(t_sprite))))
 		exit_error("Error:\nMalloc initialisation sprite");
 	ft_bzero(config->sprite, sizeof(t_sprite));
+}
+
+static void	check_config(t_config *config)
+{
+	if (config->map_found == 0)
+		exit_error("Error:\nMap not found on .cub file");
+	if (config->path_tex[TEX_NO] == NULL)
+		exit_error("Error:\nTexture north not found on .cub file");
+	if (config->path_tex[TEX_SO] == NULL)
+		exit_error("Error:\nTexture south not found on .cub file");
+	if (config->path_tex[TEX_WE] == NULL)
+		exit_error("Error:\nTexture west not found on .cub file");
+	if (config->path_tex[TEX_EA] == NULL)
+		exit_error("Error:\nTexture east not found on .cub file");
+	if (config->path_tex[4] == NULL)
+		exit_error("Error:\nSprite not found on .cub file");
+	if (config->width == -1 || config->height == -1)
+		exit_error("Error:\nResolution not found on .cub file");
+	if (config->floor == -1)
+		exit_error("Error:\nColor of floor not found on .cub file");
+	if (config->ceiling == -1)
+		exit_error("Error:\nColor of ceiling not found on .cub file");
 }
 
 t_config	*init_config(void)
@@ -70,24 +88,13 @@ t_config	*init_config(void)
 	return (config);
 }
 
-void	check_config(t_config *config)
+
+void		init_game(t_config *config)
 {
-	if (config->map_found == 0)
-		exit_error("Error:\nMap not found on .cub file");
-	if (config->path_tex[TEX_NO] == NULL)
-		exit_error("Error:\nTexture north not found on .cub file");
-	if (config->path_tex[TEX_SO] == NULL)
-		exit_error("Error:\nTexture south not found on .cub file");
-	if (config->path_tex[TEX_WE] == NULL)
-		exit_error("Error:\nTexture west not found on .cub file");
-	if (config->path_tex[TEX_EA] == NULL)
-		exit_error("Error:\nTexture east not found on .cub file");
-	if (config->path_tex[4] == NULL)
-		exit_error("Error:\nSprite not found on .cub file");
-	if (config->width == -1 || config->height == -1)
-		exit_error("Error:\nResolution not found on .cub file");
-	if (config->floor == -1)
-		exit_error("Error:\nColor of floor not found on .cub file");
-	if (config->ceiling == -1)
-		exit_error("Error:\nColor of ceiling not found on .cub file");
+	check_config(config);
+	if (!(config->init = mlx_init()))
+		exit_error("Error:\nError on mlx_init");
+	if (!(config->window = mlx_new_window(config->init, config->width,
+			config->height, "cub3d")))
+		exit_error("Error:\nCannot create window with mlx");
 }

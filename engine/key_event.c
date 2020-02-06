@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 15:06:26 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/03 15:15:36 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/06 12:48:11 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,8 @@ int			keyboard_manager(t_config *config)
 	return (1);
 }
 
-int			key_pressed(int key, void *param)
+int			key_pressed(int key, t_config *config)
 {
-	t_config	*config;
-
-	config = (t_config *)param;
 	if (key == ESC)
 		quit(config, "");
 	else if (key == LEFT && config->keyboard->left == 0)
@@ -89,11 +86,8 @@ int			key_pressed(int key, void *param)
 	return (1);
 }
 
-int			key_released(int key, void *param)
+int			key_released(int key, t_config *config)
 {
-	t_config	*config;
-
-	config = (t_config *)param;
 	if (key == LEFT && config->keyboard->left == 1)
 		config->keyboard->left = 0;
 	else if (key == RIGHT && config->keyboard->right == 1)
@@ -107,4 +101,18 @@ int			key_released(int key, void *param)
 	else if (key == CAM_RIGHT && config->keyboard->cam_right == 1)
 		config->keyboard->cam_right = 0;
 	return (1);
+}
+
+int			loop(t_config *config)
+{
+	if (!raycaster(config))
+		quit(config, "Error:\nRaycating error");
+	keyboard_manager(config);
+	return (1);
+}
+
+int			leave_window(t_config *config)
+{
+	mlx_destroy_window(config->init, config->window);
+	exit(0);
 }
