@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/06 13:45:29 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/07 13:15:23 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@
 # define BACKWARD	1
 # define FORWARD	13
 # define RIGHT		2
-# define CAM_LEFT	123
-# define CAM_RIGHT	124
+# define CAM_LEFT	124
+# define CAM_RIGHT	123
 
 # define NB_TEX		4
-# define TEX_NO		0
-# define TEX_SO		1
-# define TEX_WE		2
-# define TEX_EA		3
+# define TEX_WE		0
+# define TEX_EA		1
+# define TEX_NO		2
+# define TEX_SO		3
 
 typedef struct	s_texture
 {

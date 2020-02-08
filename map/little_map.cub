@@ -1,4 +1,4 @@
-R 400 80
+R 400 200
 NO ./text_nord.xpm
 SO ./text_sud.xpm
 WE ./text_ouest.xpm

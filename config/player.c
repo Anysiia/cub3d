@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 10:26:13 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/06 13:21:31 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/07 12:40:06 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static void		set_player(t_config *config, int i, int j, char c)
 	if (c == 'W')
 	{
 		set_dir(config, -1, 0);
-		set_camera(config, 0, 0.66);
+		set_camera(config, 0, -0.66);
 	}
 	if (c == 'E')
 	{
 		set_dir(config, 1, 0);
-		set_camera(config, 0, -0.66);
+		set_camera(config, 0, 0.66);
 	}
 	if (c == 'N')
 	{

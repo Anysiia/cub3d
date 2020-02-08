@@ -6,7 +6,7 @@
 #    By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 09:57:43 by cmorel-a          #+#    #+#              #
-#    Updated: 2020/02/03 15:33:38 by cmorel-a         ###   ########.fr        #
+#    Updated: 2020/02/07 12:31:43 by cmorel-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ all:	$(NAME)
 
 $(NAME):$(OBJS)
 		@$(MAKE) -C ./libft/
-		@gcc $(OBJS) $(INCLUDE) $(CFLAGS) $(MLX) ./libft/libft.a -o $(NAME)
+		@gcc $(OBJS) $(INCLUDE) -O3 $(CFLAGS) $(MLX) ./libft/libft.a -o $(NAME)
 
 clean:
 		@rm -rf $(OBJS)
