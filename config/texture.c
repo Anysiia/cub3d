@@ -6,13 +6,13 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:11:53 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/06 10:51:34 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/09 12:40:48 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int	check_path_format(char *str)
+static int		check_path_format(char *str)
 {
 	int		i;
 
@@ -34,7 +34,7 @@ static int	check_path_format(char *str)
 	return (1);
 }
 
-static int	path_size(char *str)
+static int		path_size(char *str)
 {
 	int		i;
 	int		len;
@@ -51,31 +51,37 @@ static int	path_size(char *str)
 	return (len);
 }
 
-static int	check_path_file(char *file)
+/*static t_image	*create_texture(t_config *config, int witch_texture)
+{
+	t_image		*image;
+
+	if (!(image = malloc(sizeof(t_image))))
+		exit_error("Error:\nCannot malloc texture image");
+	image->img_ptr = mlx_xpm_file_to_image(config->init, 
+		config->path_tex[witch_texture], &image->width, &image->height);
+	image->data = mlx_get_data_addr(image->img_ptr, &image->bpp, 
+		&image->size_line, &image->endian);
+	return (image);
+}*/
+
+static int		convert_texture(char *file, int witch_texture, t_config *config)
 {
 /*	int		fd;*/
 
 	if (!ft_type_file(file, ".xpm"))
-		return (-1);
+		exit_error("Error:\nTexture or sprite file is not an .xpm");
 /*	if ((fd = open(file, O_RDONLY)) == -1)
 	{
 		close(fd);
-		return (-1);
+		exit_error("Error:\nCannot open texture or sprite file");
 	}
 	close(fd);*/
+	config->path_tex[witch_texture] = file;
+//	config->texture[witch_texture] = create_texture(config, witch_texture);
 	return (1);
 }
 
-/*static int	path_to_image(t_texture *texture,
-		t_config *config, char *path, int side)
-{
-
-
-
-
-}*/
-
-void		texture_path(char *str, t_config *config, char c, char d)
+void			texture_path(char *str, t_config *config, char c, char d)
 {
 	char	*path;
 	int		i;
@@ -87,16 +93,14 @@ void		texture_path(char *str, t_config *config, char c, char d)
 		i++;
 	if (!(path = ft_substr(str, i, path_size(str))))
 		exit_error("Error:\nError on malloc path texture or sprite");
-	if (check_path_file(path) == -1)
-		exit_error("Error:\nTexture file error");
 	if (c == 'N' && d == 'O')
-		config->path_tex[TEX_NO] = path;
+		convert_texture(path, TEX_NO, config);
 	if (c == 'S' && d == 'O')
-		config->path_tex[TEX_SO] = path;
+		convert_texture(path, TEX_SO, config);
 	if (c == 'W' && d == 'E')
-		config->path_tex[TEX_WE] = path;
+		convert_texture(path, TEX_WE, config);
 	if (c == 'E' && d == 'A')
-		config->path_tex[TEX_EA] = path;
+		convert_texture(path, TEX_EA, config);
 	if (c == 'S' && d == ' ')
-		config->path_tex[4] = path;
+		convert_texture(path, TEX_S, config);
 }

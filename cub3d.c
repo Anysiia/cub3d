@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:08:47 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/06 13:58:42 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/09 13:09:09 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ int		main(int ac, char **av)
 	config->save = save;
 	map_read_cub(av[1], config);
 	init_game(config);
+	raycaster(config);
 	mlx_hook(config->window, 2, 1L << 0, key_pressed, config);
-	mlx_hook(config->window, 3, 1L << 1, key_released, config);
 	mlx_hook(config->window, 17, 1L << 17, leave_window, config);
-	mlx_loop_hook(config->init, loop, config);
 	if (config->save == 0)
 		mlx_loop(config->init);
 	quit(config, "");

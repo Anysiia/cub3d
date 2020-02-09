@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 15:06:26 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/06 12:48:11 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/09 13:08:15 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,69 +50,28 @@ void	turn_left(t_config *config)
 		+ config->player->plane_y * cos(rotate_speed);
 }
 
-int			keyboard_manager(t_config *config)
+int		leave_window(t_config *config)
 {
-	if (config->keyboard->left == 1)
-		move_left(config);
-	if (config->keyboard->right == 1)
-		move_right(config);
-	if (config->keyboard->forward == 1)
-		move_forward(config);
-	if (config->keyboard->backward == 1)
-		move_backward(config);
-	if (config->keyboard->cam_left == 1)
-		turn_left(config);
-	if (config->keyboard->cam_right == 1)
-		turn_right(config);
-	return (1);
+	mlx_destroy_window(config->init, config->window);
+	exit(0);
 }
 
 int			key_pressed(int key, t_config *config)
 {
 	if (key == ESC)
 		quit(config, "");
-	else if (key == LEFT && config->keyboard->left == 0)
-		config->keyboard->left = 1;
-	else if (key == RIGHT && config->keyboard->right == 0)
-		config->keyboard->right = 1;
-	else if (key == FORWARD && config->keyboard->forward == 0)
-		config->keyboard->forward = 1;
-	else if (key == BACKWARD && config->keyboard->backward == 0)
-		config->keyboard->backward = 1;
-	else if (key == CAM_LEFT && config->keyboard->cam_left == 0)
-		config->keyboard->cam_left = 1;
-	else if (key == CAM_RIGHT && config->keyboard->cam_right == 0)
-		config->keyboard->cam_right = 1;
+	else if (key == LEFT)
+		move_left(config);
+	else if (key == RIGHT)
+		move_right(config);
+	else if (key == FORWARD)
+		move_forward(config);
+	else if (key == BACKWARD)
+		move_backward(config);
+	else if (key == CAM_LEFT)
+		turn_left(config);
+	else if (key == CAM_RIGHT)
+		turn_right(config);
+	raycaster(config);
 	return (1);
-}
-
-int			key_released(int key, t_config *config)
-{
-	if (key == LEFT && config->keyboard->left == 1)
-		config->keyboard->left = 0;
-	else if (key == RIGHT && config->keyboard->right == 1)
-		config->keyboard->right = 0;
-	else if (key == FORWARD && config->keyboard->forward == 1)
-		config->keyboard->forward = 0;
-	else if (key == BACKWARD && config->keyboard->backward == 1)
-		config->keyboard->backward = 0;
-	else if (key == CAM_LEFT && config->keyboard->cam_left == 1)
-		config->keyboard->cam_left = 0;
-	else if (key == CAM_RIGHT && config->keyboard->cam_right == 1)
-		config->keyboard->cam_right = 0;
-	return (1);
-}
-
-int			loop(t_config *config)
-{
-	if (!raycaster(config))
-		quit(config, "Error:\nRaycating error");
-	keyboard_manager(config);
-	return (1);
-}
-
-int			leave_window(t_config *config)
-{
-	mlx_destroy_window(config->init, config->window);
-	exit(0);
 }

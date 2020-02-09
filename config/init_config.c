@@ -6,44 +6,19 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:06:54 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/06 13:58:39 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/09 13:11:47 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	init_map_and_keyboard(t_config *config)
+static void	init_map(t_config *config)
 {
 	if (!(config->map = malloc(sizeof(t_map))))
 		exit_error("Error:\nMalloc initialisation map");
-	if (!(config->keyboard = malloc(sizeof(t_keyboard))))
-		exit_error("Error:\nMalloc initialisation keyboard manager");
 	config->map->width = 0;
 	config->map->height = 0;
 	config->map->map = NULL;
-	config->keyboard->right = 0;
-	config->keyboard->left = 0;
-	config->keyboard->backward = 0;
-	config->keyboard->forward = 0;
-	config->keyboard->cam_left = 0;
-	config->keyboard->cam_right = 0;
-}
-
-static void	init_texture_and_sprite(t_config *config)
-{
-	int		i;
-
-	i = 0;
-	while (i < NB_TEX)
-	{
-		if (!(config->texture[i] = malloc(sizeof(t_texture))))
-			exit_error("Error:\nMalloc initialisation texture");
-		ft_bzero(config->texture[i], sizeof(t_texture));
-		i++;
-	}
-	if (!(config->sprite = malloc(sizeof(t_sprite))))
-		exit_error("Error:\nMalloc initialisation sprite");
-	ft_bzero(config->sprite, sizeof(t_sprite));
 }
 
 static void	check_config(t_config *config)
@@ -83,11 +58,9 @@ t_config	*init_config(void)
 		config->path_tex[i++] = NULL;
 	config->floor = -1;
 	config->ceiling = -1;
-	init_map_and_keyboard(config);
-	init_texture_and_sprite(config);
+	init_map(config);
 	return (config);
 }
-
 
 void		init_game(t_config *config)
 {

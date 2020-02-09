@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/07 13:15:23 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/09 13:14:04 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,23 @@
 # define CAM_LEFT	124
 # define CAM_RIGHT	123
 
-# define NB_TEX		4
+# define NB_TEX		5
 # define TEX_WE		0
 # define TEX_EA		1
 # define TEX_NO		2
 # define TEX_SO		3
+# define TEX_S		4
 
-typedef struct	s_texture
+typedef struct	s_image
 {
+	void		*img_ptr;
 	int			width;
 	int			height;
-	int			size_line;
-	int			bpp;
-	int			endian;
-	void		*img_ptr;
 	char		*data;
-}				t_texture;
-
-typedef struct	s_sprite
-{
-	int			width;
-	int			height;
-	int			size_line;
 	int			bpp;
+	int			size_line;
 	int			endian;
-	void		*img_ptr;
-	char		*data;
-	int			no_sprite;
-}				t_sprite;
+}				t_image;
 
 typedef struct	s_ray
 {
@@ -79,16 +68,6 @@ typedef struct	s_ray
 	int			camera_height;
 	double		*img_buff;
 }				t_ray;
-
-typedef struct	s_keyboard
-{
-	int			left;
-	int			right;
-	int			backward;
-	int			forward;
-	int			cam_left;
-	int			cam_right;
-}				t_keyboard;
 
 typedef struct	s_map
 {
@@ -117,7 +96,7 @@ typedef struct	s_config
 	int			save;
 	int			width;
 	int			height;
-	char		*path_tex[NB_TEX + 1];
+	char		*path_tex[NB_TEX];
 	int			color[NB_TEX];;
 	int			floor;
 	int			ceiling;
@@ -126,8 +105,7 @@ typedef struct	s_config
 	t_map		*map;
 	t_player	*player;
 	t_keyboard	*keyboard;
-	t_texture	*texture[NB_TEX];
-	t_sprite	*sprite;
+	t_image		*texture[NB_TEX];
 }				t_config;
 
 t_config		*init_config(void);
@@ -151,11 +129,8 @@ void			move_left(t_config *config);
 void			move_right(t_config *config);
 void			turn_right(t_config *config);
 void			turn_left(t_config *config);
-int				keyboard_manager(t_config *config);
 int				key_pressed(int key, t_config *config);
-int				key_released(int key, t_config *config);
 int				leave_window(t_config *config);
-int				loop(t_config *config);
 
 int				get_next_line(int fd, char **line);
 char			*ft_free_s1_join(char *s1, const char *s2);
