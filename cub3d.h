@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/09 13:14:04 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/09 13:25:12 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ typedef struct	s_config
 	int			empty_line;
 	t_map		*map;
 	t_player	*player;
-	t_keyboard	*keyboard;
 	t_image		*texture[NB_TEX];
 }				t_config;
 
