@@ -8,15 +8,16 @@ int		ft_strlen(char *str)
 	return (i);
 }
 
-int		len_to_no_one(char *str)
+int		len_first_end_one(char *str)
 {
 	int		i;
 
-	i = ft_strlen(str);
-	i--;
-	while (str[i] == '1')
+	i = ft_strlen(str) - 1;
+	while (i > 0 && str[i] == '1')
 		i--;
-	i++;
+	if (str[i] != '1')
+		i += 1;
+	i += 1;
 	return (i);
 }
 
@@ -24,6 +25,6 @@ int		len_to_no_one(char *str)
 int main(int ac, char **av)
 {
 	if (ac == 2)
-	printf("%d\n", len_to_no_one(av[1]));
+	printf("%d\n", len_first_end_one(av[1]));
 	return (0);
 }

@@ -74,6 +74,8 @@ static void	config_map(char *line, t_config *config, char **map)
 		color(line, config, 'C');
 	if (line[0] == '1' || line[0] == ' ')
 		line_map_save(line, map, config);
+	else
+		exit_error("Error:\nInvalid character on description file");
 }
 
 char		*map_read_cub(const char *cub, t_config *config)

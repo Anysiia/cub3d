@@ -19,16 +19,14 @@ int		main(int ac, char **av)
 	
 	save = (ac == 3 && !ft_strcmp(av[2], "--save"));
 	check_arg(ac, av, save);
-	config = init_config();
-	config->save = save;
+	config = init_config(save);
 	map_read_cub(av[1], config);
-	init_game(config);
+/*	init_game(config);
 	raycaster(config);
 	mlx_hook(config->window, 2, 1L << 0, key_pressed, config);
 	mlx_hook(config->window, 17, 1L << 17, leave_window, config);
 	if (config->save == 0)
-		mlx_loop(config->init);
-	quit(config, "");
+		mlx_loop(config->init);*/
 	return (0);
 }
 

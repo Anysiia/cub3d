@@ -58,14 +58,16 @@ char	*ft_free_s1_join(char *s1, char const *s2)
 	return (str);
 }
 
-int		len_to_no_one(char *str)
+int		len_first_end_one(char *str)
 {
 	int		i;
 
 	i = ft_strlen(str);
-	i--;
-	while (str[i] == '1')
+	while (i > 0 && str[i] == '1')
 		i--;
+	if (str[i] != '1')
+		i++;
+	i += 1;
 	return (i);
 }
 
@@ -82,3 +84,17 @@ int		test_set(char c, char *charset)
 	}
 	return (0);
 }
+
+void		only_char_in_line(const char *line, char c)
+{
+	int		i;
+
+	i = 0;
+	while (line[i] != '\0')
+	{
+		if (line[i] != c)
+			exit_error("Error:\nMap must be close by walls");
+		i++;
+	}
+}
+

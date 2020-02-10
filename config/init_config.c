@@ -43,7 +43,7 @@ static void	check_config(t_config *config)
 		exit_error("Error:\nColor of ceiling not found on .cub file");
 }
 
-t_config	*init_config(void)
+t_config	*init_config(int save)
 {
 	t_config	*config;
 	int			i;
@@ -52,7 +52,7 @@ t_config	*init_config(void)
 		exit_error("Error:\nMalloc initialisation configuration");
 	config->width = -1;
 	config->height = -1;
-	config->save = 0;
+	config->save = save;
 	i = 0;
 	while (i < NB_TEX)
 		config->path_tex[i++] = NULL;

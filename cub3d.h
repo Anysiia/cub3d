@@ -107,13 +107,14 @@ typedef struct	s_config
 	t_image		*texture[NB_TEX];
 }				t_config;
 
-t_config		*init_config(void);
+t_config		*init_config(int save);
 int				check_arg(int ac, char **av, int save);
 void			exit_error(const char *msg);
 void			quit(t_config *config, const char *msg);
 void			init_game(t_config *config);
 char			*map_read_cub(const char *cub, t_config *config);
 int				map_format(t_config *config, char *strmap);
+void			only_char_in_line(const char *line, char c);
 void			find_player(t_config *config);
 void			resolution(char *line, t_config *config);
 void			color(char *line, t_config *config, char c);
@@ -131,10 +132,13 @@ void			turn_left(t_config *config);
 int				key_pressed(int key, t_config *config);
 int				leave_window(t_config *config);
 
+//to add in libft
 int				get_next_line(int fd, char **line);
 char			*ft_free_s1_join(char *s1, const char *s2);
 int				ft_type_file(const char *file, const char *type);
-int				len_to_no_one(char *str);
 int				test_set(char c, char *charset);
+
+//utils
+int				len_first_end_one(char *str);
 
 #endif

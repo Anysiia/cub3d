@@ -91,26 +91,27 @@ static void		map_validity(t_config *config)
 {
 	int		i;
 	int		len_line;
-	int		len_compare;
+	int		len_previous_line;
 
-	i = 0;
-	while (config->map->map[0][i] != '\0')
-		if (config->map->map[0][i++] != '1')
-			exit_error("Error:\nMap must be close by walls");
-	i = 0;
-	while (config->map->map[config->map->height - 1][i] != '\0')
-		if (config->map->map[config->map->height - 1][i++] != '1')
-			exit_error("Error:\nMap must be close by walls");
+	only_char_in_line(config->map->map[0], '1');
+	only_char_in_line(config->map->map[config->map->height - 1], '1');
 	i = 1;
-	while (i++ < config->map->height - 2)
+	while (i++ < config->map->height - 1)
 	{
-		len_line = len_to_no_one(config->map->map[i]);
-		len_compare = ft_strlen(config->map->map[i - 1]);
-		if (len_compare < len_line)
+		len_line = len_first_end_one(config->map->map[i]);
+		len_previous_line = ft_strlen(config->map->map[i - 1]);
+		if (len_previous_line < len_line)
 			exit_error("Error:\nMap must be close by walls");
-		len_compare = ft_strlen(config->map->map[i + 1]);
-		if (len_compare < len_line)
-			exit_error("Error:\nMap must be close by walls");
+		if (len_previous_line > len_line)
+		{
+			len_line--;
+			while (len_line < len_previous_line)
+			{
+				if (config->map->map[i - 1][len_line] != '1')
+					exit_error("Error:\nMap must be close by walls");
+				len_line++;
+			}
+		}
 	}
 }
 
