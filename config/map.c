@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 12:25:52 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/08 13:23:34 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/11 12:21:58 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,11 @@ static void		map_validity(t_config *config)
 	int		len_previous_line;
 
 	only_char_in_line(config->map->map[0], '1');
-	only_char_in_line(config->map->map[config->map->height - 1], '1');
 	i = 1;
-	while (i++ < config->map->height - 1)
+	while (i < config->map->height - 1)
 	{
-		len_line = len_first_end_one(config->map->map[i]);
 		len_previous_line = ft_strlen(config->map->map[i - 1]);
+		len_line = len_first_end_one(config->map->map[i]);
 		if (len_previous_line < len_line)
 			exit_error("Error:\nMap must be close by walls");
 		if (len_previous_line > len_line)
@@ -112,7 +111,9 @@ static void		map_validity(t_config *config)
 				len_line++;
 			}
 		}
+		i++;
 	}
+	check_last_line(config);
 }
 
 int				map_format(t_config *config, char *strmap)
@@ -120,7 +121,7 @@ int				map_format(t_config *config, char *strmap)
 	size_map(strmap, config);
 	if (config->map->height < 3 || config->map->width < 3)
 		exit_error("Error:\nMap is too small");
-	if (config->map->height > 1024 || config->map->width > 1024)
+	if (config->map->height > 512 || config->map->width > 512)
 		exit_error("Error:\nMap is too big");
 	create_map(config);
 	copy_map(config, strmap);

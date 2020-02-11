@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/09 13:25:12 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:33:22 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 typedef struct	s_image
 {
-	void		*img_ptr;
+	void		*img;
 	int			width;
 	int			height;
 	char		*data;
@@ -104,7 +104,7 @@ typedef struct	s_config
 	int			empty_line;
 	t_map		*map;
 	t_player	*player;
-	t_image		*texture[NB_TEX];
+	t_image		*text[NB_TEX];
 }				t_config;
 
 t_config		*init_config(int save);
@@ -114,11 +114,13 @@ void			quit(t_config *config, const char *msg);
 void			init_game(t_config *config);
 char			*map_read_cub(const char *cub, t_config *config);
 int				map_format(t_config *config, char *strmap);
+int				len_first_end_one(const char *str);
 void			only_char_in_line(const char *line, char c);
+void			check_last_line(t_config *config);
 void			find_player(t_config *config);
 void			resolution(char *line, t_config *config);
 void			color(char *line, t_config *config, char c);
-void			texture_path(char *line, t_config *config, char c, char d);
+void			texture_path(char *line, t_config *config);
 
 int				raycaster(t_config *config);
 void			side(t_ray *ray, t_config *config);
@@ -132,13 +134,6 @@ void			turn_left(t_config *config);
 int				key_pressed(int key, t_config *config);
 int				leave_window(t_config *config);
 
-//to add in libft
-int				get_next_line(int fd, char **line);
-char			*ft_free_s1_join(char *s1, const char *s2);
-int				ft_type_file(const char *file, const char *type);
-int				test_set(char c, char *charset);
-
-//utils
-int				len_first_end_one(char *str);
+void			create_bitmap(t_config *config);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:06:54 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/09 13:11:47 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/11 16:03:37 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,27 @@ t_config	*init_config(int save)
 
 void		init_game(t_config *config)
 {
+	int		i;
+
 	check_config(config);
 	if (!(config->init = mlx_init()))
 		exit_error("Error:\nError on mlx_init");
 	if (!(config->window = mlx_new_window(config->init, config->width,
 			config->height, "cub3d")))
 		exit_error("Error:\nCannot create window with mlx");
+	i = 0;
+	while (i < NB_TEX)
+	{
+		if (!(config->text[i] = malloc(sizeof(t_image))))
+			exit_error("Error:\nCannot malloc texture image");
+		if (!(config->text[i]->img = mlx_xpm_file_to_image(config->init,
+			config->path_tex[i], &config->text[i]->width, 
+			&config->text[i]->height)))
+			exit_error("Error:\nConvert xmp texture file failed");
+		if (!(config->text[i]->data = mlx_get_data_addr(config->text[i]->img,
+			&config->text[i]->bpp, &config->text[i]->size_line,
+			&config->text[i]->endian)))
+			exit_error("Error:\nConvert xmp texture file failed");
+		i++;
+	}
 }

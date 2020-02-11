@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_free_s1_join.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 17:01:51 by cmorel-a          #+#    #+#             */
-/*   Updated: 2019/10/25 13:09:19 by cmorel-a         ###   ########.fr       */
+/*   Created: 2020/02/11 11:31:37 by cmorel-a          #+#    #+#             */
+/*   Updated: 2020/02/11 11:32:18 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_free_s1_join(char *s1, char const *s2)
 {
+	int		len;
+	int		i;
 	char	*str;
-	size_t	i;
-	size_t	l;
 
-	i = 0;
-	if (!s)
+	if (!s1 || !s2)
 		return (NULL);
-	len = (len < 0 ? 0 : len);
-	l = ft_strlen(s);
-	if (l <= start)
-	{
-		if (!(str = (char *)malloc(sizeof(*str) * 1)))
-			return (NULL);
-		str[i] = '\0';
-		return (str);
-	}
+	i = ft_strlen(s1);
+	len = ft_strlen(s2);
+	len += i;
+	i = 0;
 	if (!(str = (char *)malloc(sizeof(*str) * (len + 1))))
 		return (NULL);
-	while (s[i + start] && i < len)
-	{
-		str[i] = s[i + start];
-		i++;
-	}
-	str[i] = '\0';
+	i = -1;
+	while (s1[++i])
+		str[i] = s1[i];
+	len = -1;
+	while (s2[++len])
+		str[i + len] = s2[len];
+	str[i + len] = '\0';
+	free(s1);
 	return (str);
 }

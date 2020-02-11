@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 15:06:26 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/09 13:08:15 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/11 13:15:52 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		leave_window(t_config *config)
 	exit(0);
 }
 
-int			key_pressed(int key, t_config *config)
+int		key_pressed(int key, t_config *config)
 {
 	if (key == ESC)
 		quit(config, "");

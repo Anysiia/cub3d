@@ -6,7 +6,7 @@
 #    By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 14:38:15 by cmorel-a          #+#    #+#              #
-#    Updated: 2020/02/08 11:59:38 by cmorel-a         ###   ########.fr        #
+#    Updated: 2020/02/11 11:34:54 by cmorel-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,15 @@ SRCS = ./ft_atoi.c \
 	./ft_isdigit.c \
 	./ft_isprint.c \
 	./ft_split.c \
-	./ft_strjoin.c \
 	./ft_strlcpy.c \
 	./ft_strlen.c \
 	./ft_strcmp.c \
 	./ft_strnew.c \
 	./ft_substr.c \
 	./ft_free_strtrim.c \
+	./ft_test_set.c \
+	./ft_type_file.c \
+	./ft_free_s1_join.c \
 	./gnl.c
 
 OBJS = ${SRCS:.c=.o}

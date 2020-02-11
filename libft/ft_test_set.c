@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_test_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 18:35:57 by cmorel-a          #+#    #+#             */
-/*   Updated: 2019/10/24 17:01:02 by cmorel-a         ###   ########.fr       */
+/*   Created: 2020/02/11 11:26:49 by cmorel-a          #+#    #+#             */
+/*   Updated: 2020/02/11 11:28:07 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int		ft_test_set(const char c, const char *charset)
 {
-	int		len;
 	int		i;
-	char	*str;
 
-	if (!s1 || !s2)
-		return (NULL);
-	i = ft_strlen(s1);
-	len = ft_strlen(s2);
-	len += i;
 	i = 0;
-	if (!(str = (char *)malloc(sizeof(*str) * (len + 1))))
-		return (NULL);
-	i = -1;
-	while (s1[++i])
-		str[i] = s1[i];
-	len = -1;
-	while (s2[++len])
-		str[i + len] = s2[len];
-	str[i + len] = '\0';
-	return (str);
+	while (charset[i])
+	{
+		if (charset[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }

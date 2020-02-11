@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 10:26:13 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/07 12:40:06 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/11 11:19:55 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void			find_player(t_config *config)
 		j = 0;
 		while (j < config->map->width)
 		{
-			if (test_set(config->map->map[i][j], "NSEW") == 1)
+			if (ft_test_set(config->map->map[i][j], "NSEW") == 1)
 			{
 				if (config->player->find == 1)
 					exit_error("Error:\nThere is more than one player on map");

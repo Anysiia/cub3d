@@ -1,0 +1,16 @@
+R 400 200
+J
+NO /Users/cmorel-a/cub3d/texture/bricks1.xpm 
+SO /Users/cmorel-a/cub3d/texture/bricks2.xpm 
+WE /Users/cmorel-a/cub3d/texture/bricks3.xpm 
+EA /Users/cmorel-a/cub3d/texture/bricks4.xpm 
+S ./text_sprite.xpm
+F 135,206,250
+C 230,255,230
+
+1 1 1 1 1 1 1
+1 0 0 0 0 0 1
+1 0 1 0 0 2 1 1 1
+1 0 1 1 1 1 1 S 1
+1 0 0 0 0 0 0 0 1
+1 1 1 1 1 1 1 1 1
