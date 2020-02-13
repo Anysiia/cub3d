@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:23:45 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/11 16:01:23 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:21:17 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static void	line_map_save(char *line, char **map, t_config *config)
 {
 	char	*clean_map;
 
-	if (config->map_found == 1 && config->empty_line == 1 && line[0])
+	if (config->map->map_found == 1 && config->map->empty_line == 1 && line[0])
 		exit_error("Error:\nInvalid map : empty line");
-	config->map_found = 1;
+	config->map->map_found = 1;
 	if (!(clean_map = clean_string(line)))
 		exit_error("Error:\nMap must be close by walls");
 	if (!(*map = ft_free_s1_join(*map, clean_map)))
@@ -54,7 +54,7 @@ static void	line_map_save(char *line, char **map, t_config *config)
 
 static void	config_map(char *line, t_config *config, char **map)
 {
-	if (config->map_found == 1 && line[0] != '\0' && line[0] != '1')
+	if (config->map->map_found == 1 && line[0] != '\0' && line[0] != '1')
 		exit_error("Error:\nMap error");
 	if (line[0] == 'R')
 		resolution(line, config);
@@ -84,8 +84,8 @@ char		*map_read_cub(const char *cub, t_config *config)
 	while ((res = get_next_line(fd, &line)) >= 0)
 	{
 		line = ft_free_strtrim(line, " ");
-		if (config->map_found == 1 && line[0] == '\0')
-			config->empty_line = 1;
+		if (config->map->map_found == 1 && line[0] == '\0')
+			config->map->empty_line = 1;
 		config_map(line, config, &map);
 		free(line);
 		if (res == 0)

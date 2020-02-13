@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:37:30 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/03 14:53:48 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 09:41:59 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,16 @@ static int	rgb_color(int r, int g, int b)
 	return (rgb);
 }
 
+static void	check_config_color(t_config *config, char c)
+{
+	if (c == 'F')
+		if (config->floor != -1)
+			exit_error("Error:\nMore than one floor color");
+	if (c == 'C')
+		if (config->ceiling != -1)
+			exit_error("Error:\nMore than one ceiling color");
+}
+
 void		color(char *line, t_config *config, char c)
 {
 	int	rgb;
@@ -70,6 +80,7 @@ void		color(char *line, t_config *config, char c)
 	int	i;
 
 	i = 1;
+	check_config_color(config, c);
 	if (!check_color_line(line, c))
 		exit_error("Error:\nWrong format color");
 	while (line[i] == ' ')

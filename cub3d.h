@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/11 15:33:22 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:50:57 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct	s_image
 
 typedef struct	s_ray
 {
-	double		camera_x;
+	double		cam;
 	int			stripe;
 	double		ray_dir_x;
 	double		ray_dir_y;
@@ -74,6 +74,8 @@ typedef struct	s_map
 	char		**map;
 	int			width;
 	int			height;
+	int			map_found;
+	int			empty_line;
 }				t_map;
 
 typedef struct	s_player
@@ -97,14 +99,12 @@ typedef struct	s_config
 	int			width;
 	int			height;
 	char		*path_tex[NB_TEX];
-	int			color[NB_TEX];;
 	int			floor;
 	int			ceiling;
-	int			map_found;
-	int			empty_line;
 	t_map		*map;
 	t_player	*player;
 	t_image		*text[NB_TEX];
+	t_image		*background;
 }				t_config;
 
 t_config		*init_config(int save);

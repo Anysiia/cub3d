@@ -1,0 +1,17 @@
+R 800 400
+F 135,206,250
+NO /Users/cmorel-a/cub3d/texture/bricks1.xpm
+SO /Users/cmorel-a/cub3d/texture/bricks2.xpm
+WE /Users/cmorel-a/cub3d/texture/bricks3.xpm
+EA /Users/cmorel-a/cub3d/texture/bricks4.xpm
+S /Users/cmorel-a/cub3d/texture/blue_trees.xpm
+C 135,206,250
+SO /Users/cmorel-a/cub3d/texture/bricks2.xpm
+
+1 1 1 1 1 1 1 1 1
+1 0 0 E 0 0 0 0 1
+1 1 1 0 0 2 0 0 1
+1 0 0 0 1 1 1 0 1
+1 1 1 1 1 1 1 0 1
+1 0 0 0 0 0 0 0 1
+1 1 1 1 1 1 1 1 1

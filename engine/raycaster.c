@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 11:49:59 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/11 13:21:51 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 09:55:04 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void		ray_values(t_config *config, t_ray *ray, t_player *player)
 {
-	ray->camera_x = (2 * ray->stripe) / (double)config->width - 1;
-	ray->ray_dir_x = player->dir_x + player->plane_x * ray->camera_x;
-	ray->ray_dir_y = player->dir_y + player->plane_y * ray->camera_x;
+	ray->cam = (2 * ray->stripe) / (double)config->width - 1;
+	ray->ray_dir_x = player->dir_x + player->plane_x * ray->cam;
+	ray->ray_dir_y = player->dir_y + player->plane_y * ray->cam;
 	ray->map_x = (int)player->pos_x;
 	ray->map_y = (int)player->pos_y;
 	ray->delta_x = fabs(1 / ray->ray_dir_x);

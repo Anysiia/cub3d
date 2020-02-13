@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:56:11 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/01/30 12:19:30 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 09:31:13 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void		resolution(char *line, t_config *config)
 	int		i;
 	int		res;
 
+	if (config->height != -1)
+		exit_error("Error:\nMore than one resolution configuration");
 	if (!check_resolution_line(line))
 		exit_error("Error:\nWrong resolution");
 	i = 1;
@@ -62,6 +64,8 @@ void		resolution(char *line, t_config *config)
 		i++;
 	res = get_number(line, i);
 	res = (res > 2560 ? 2560 : res);
+	if (res < 50)
+		exit_error("Error:\nWidth resolution is too small");
 	config->width = res;
 	while (ft_isdigit(line[i]))
 		i++;
@@ -69,5 +73,7 @@ void		resolution(char *line, t_config *config)
 		i++;
 	res = get_number(line, i);
 	res = (res > 1440 ? 1440 : res);
+	if (res < 50)
+		exit_error("Error:\nHeight resolution is too small");
 	config->height = res;
 }

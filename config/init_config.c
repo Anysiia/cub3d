@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:06:54 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/11 16:03:37 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:22:14 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_map(t_config *config)
 
 static void	check_config(t_config *config)
 {
-	if (config->map_found == 0)
+	if (config->map->map_found == 0)
 		exit_error("Error:\nMap not found on .cub file");
 	if (config->path_tex[TEX_NO] == NULL)
 		exit_error("Error:\nTexture north not found on .cub file");
