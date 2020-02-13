@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 11:49:59 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/13 14:14:52 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 16:25:03 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ static void		colorisation(t_config *config, t_ray *ray)
 	while (i < ray->draw_stop)
 	{
 		if (ray->side == 0)
-			mlx_pixel_put(config->init, config->window, ray->stripe, i, 16711680);
+			put_pixel_to_image(config->scene, ray->stripe, i, 16711680);
 		if (ray->side == 1)
-			mlx_pixel_put(config->init, config->window, ray->stripe, i, 255);
+			put_pixel_to_image(config->scene, ray->stripe, i, 255);
 		if (ray->side == 2)
-			mlx_pixel_put(config->init, config->window, ray->stripe, i, 13648805);
+			put_pixel_to_image(config->scene, ray->stripe, i, 13648805);
 		if (ray->side == 3)
-			mlx_pixel_put(config->init, config->window, ray->stripe, i, 2788906);
+			put_pixel_to_image(config->scene, ray->stripe, i, 15043895);
 		i++;
 	}
 }
@@ -92,9 +92,10 @@ int				raycaster(t_config *config)
 	if (!(ray->img_buff = malloc(sizeof(double) * config->width)))
 		return (-1);
 	ft_bzero(ray->img_buff, sizeof(double) * config->width);
-	put_background(config);
+	color_background(config);
 	while (ray->stripe < config->width)
 		stripe_caster(config, ray);
+	put_scene(config);
 //	draw_sprite(ray, config);
 	free(ray->img_buff);
 	free(ray);

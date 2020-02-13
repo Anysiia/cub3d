@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/13 13:50:06 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 16:17:53 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct	s_ray
 	int			line_height;
 	int			draw_start;
 	int			draw_stop;
-	int			camera_height;
 	double		*img_buff;
 }				t_ray;
 
@@ -104,7 +103,7 @@ typedef struct	s_config
 	t_map		*map;
 	t_player	*player;
 	t_image		*text[NB_TEX];
-	t_image		*background;
+	t_image		*scene;
 }				t_config;
 
 t_config		*init_config(int save);
@@ -112,7 +111,7 @@ int				check_arg(int ac, char **av, int save);
 void			exit_error(const char *msg);
 void			quit(t_config *config, const char *msg);
 void			init_game(t_config *config);
-void			init_background(t_config *config);
+void			init_scene(t_config *config);
 char			*map_read_cub(const char *cub, t_config *config);
 int				map_format(t_config *config, char *strmap);
 int				len_first_end_one(const char *str);
@@ -125,7 +124,8 @@ void			texture_path(char *line, t_config *config);
 
 int				raycaster(t_config *config);
 void			put_pixel_to_image(t_image *image, int x, int y, int color);
-void			put_background(t_config *config);
+void			color_background(t_config *config);
+void			put_scene(t_config *config);
 void			side(t_ray *ray, t_config *config);
 void			dist_and_height(t_ray *ray, t_player *player, t_config *config);
 void			move_forward(t_config *config);

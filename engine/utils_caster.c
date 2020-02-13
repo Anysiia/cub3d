@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 15:26:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/11 13:16:55 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 16:14:00 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,20 @@ void	dist_and_height(t_ray *ray, t_player *player, t_config *config)
 	ray->draw_stop = (ray->line_height / 2) + (config->height / 2);
 	if (ray->draw_stop >= config->height)
 		ray->draw_stop = config->height - 1;
+}
+
+void			put_pixel_to_image(t_image *img, int x, int y, int color)
+{
+	unsigned char *src;
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+
+	src = (unsigned char *)&color;
+	r = src[0];
+	g = src[1];
+	b = src[2];
+	img->data[y * img->size_line + x * img->bpp / 8] = r;
+	img->data[y * img->size_line + x * img->bpp / 8 + 1] = g;
+	img->data[y * img->size_line + x * img->bpp / 8 + 2] = b;
 }
