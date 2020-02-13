@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:06:54 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/13 11:03:07 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:09:05 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static void	check_config(t_config *config)
 		exit_error("Error:\nSprite not found on .cub file");
 	if (config->width == -1 || config->height == -1)
 		exit_error("Error:\nResolution not found on .cub file");
-	if (config->floor[0] == -1)
+	if (config->floor == -1)
 		exit_error("Error:\nColor of floor not found on .cub file");
-	if (config->ceiling[0] == -1)
+	if (config->ceiling == -1)
 		exit_error("Error:\nColor of ceiling not found on .cub file");
 }
 
@@ -56,8 +56,8 @@ t_config	*init_config(int save)
 	i = 0;
 	while (i < NB_TEX)
 		config->path_tex[i++] = NULL;
-	config->floor[0] = -1;
-	config->ceiling[0] = -1;
+	config->floor = -1;
+	config->ceiling = -1;
 	init_map(config);
 	return (config);
 }
@@ -87,4 +87,5 @@ void		init_game(t_config *config)
 			exit_error("Error:\nConvert xmp texture file failed");
 		i++;
 	}
+	init_background(config);
 }

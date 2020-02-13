@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:08:47 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/11 16:21:06 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:11:07 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void	exit_error(const char *msg)
 
 void	quit(t_config *config, const char *msg)
 {
-	if (msg)
-		write(1, msg, ft_strlen(msg));
-	write(1, "\n", 1);
+	exit_error(msg);
 	mlx_destroy_window(config->init, config->window);
 	exit(0);
 }

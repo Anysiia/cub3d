@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:37:30 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/13 11:07:37 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 13:50:21 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,36 +51,39 @@ static int	one_color(char *line, int *i)
 	return (color);
 }
 
-static void	check_config_color(t_config *config, char c)
+static int	rgb_color(int r, int g, int b)
 {
-	if (c == 'F')
-		if (config->floor[0] != -1)
-			exit_error("Error:\nMore than one floor color");
-	if (c == 'C')
-		if (config->ceiling[0] != -1)
-			exit_error("Error:\nMore than one ceiling color");
+	int		rgb;
+
+	rgb = r;
+	rgb = (rgb << 8) + g;
+	rgb = (rgb << 8) + b;
+	return (rgb);
 }
 
 void		color(char *line, t_config *config, char c)
 {
 	int	i;
+	int	r;
+	int	g;
+	int	b;
 
 	i = 1;
-	check_config_color(config, c);
+	if (c == 'F')
+		if (config->floor != -1)
+			exit_error("Error:\nMore than one floor color");
+	if (c == 'C')
+		if (config->ceiling != -1)
+			exit_error("Error:\nMore than one ceiling color");
 	if (!check_color_line(line, c))
 		exit_error("Error:\nWrong format color");
 	while (line[i] == ' ')
 		i++;
+	r = one_color(line, &i);
+	g = one_color(line, &i);
+	b = one_color(line, &i);
 	if (c == 'F')
-	{
-		config->floor[0] = one_color(line, &i);
-		config->floor[1] = one_color(line, &i);
-		config->floor[2] = one_color(line, &i);
-	}
+		config->floor = rgb_color(r, g, b);
 	if (c == 'C')
-	{
-		config->ceiling[0] = one_color(line, &i);
-		config->ceiling[1] = one_color(line, &i);
-		config->ceiling[2] = one_color(line, &i);
-	}
+		config->ceiling = rgb_color(r, g, b);
 }
