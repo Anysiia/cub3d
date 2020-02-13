@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 11:49:59 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/13 09:55:04 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 11:04:34 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		colorisation(t_config *config, t_ray *ray)
 	i = 0;
 	while (i < ray->draw_start && i < (config->height / 2))
 	{
-		mlx_pixel_put(config->init, config->window, ray->stripe, i, config->ceiling);
+		mlx_pixel_put(config->init, config->window, ray->stripe, i, config->ceiling[0]);
 		i++;
 	}
 	while (i < ray->draw_stop)
@@ -72,7 +72,7 @@ static void		colorisation(t_config *config, t_ray *ray)
 	}
 	while (i < config->height - 1 && i >= (config->height / 2))
 	{
-		mlx_pixel_put(config->init, config->window, ray->stripe, i, config->floor);
+		mlx_pixel_put(config->init, config->window, ray->stripe, i, config->floor[0]);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/13 10:50:57 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:58:01 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ typedef struct	s_config
 	int			width;
 	int			height;
 	char		*path_tex[NB_TEX];
-	int			floor;
-	int			ceiling;
+	int			floor[3];
+	int			ceiling[3];
 	t_map		*map;
 	t_player	*player;
 	t_image		*text[NB_TEX];
