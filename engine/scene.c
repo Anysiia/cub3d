@@ -6,13 +6,13 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 10:30:19 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/14 12:04:45 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/14 14:14:33 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void		put_pixel_to_image(t_image *img, int x, int y, int color)
+static void		put_pixel_to_image(t_image *img, int x, int y, int color)
 {
 	unsigned char *src;
 	unsigned char r;
