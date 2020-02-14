@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/13 16:17:53 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:23:25 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,16 @@ typedef struct	s_ray
 	double		*img_buff;
 }				t_ray;
 
+typedef struct	s_stripe
+{
+	int			x;
+	int			y;
+	int			start;
+	int			stop;
+	int			text_x;
+	int			text_y;
+}				t_stripe;
+
 typedef struct	s_map
 {
 	char		**map;
@@ -123,11 +133,9 @@ void			color(char *line, t_config *config, char c);
 void			texture_path(char *line, t_config *config);
 
 int				raycaster(t_config *config);
-void			put_pixel_to_image(t_image *image, int x, int y, int color);
-void			color_background(t_config *config);
-void			put_scene(t_config *config);
-void			side(t_ray *ray, t_config *config);
-void			dist_and_height(t_ray *ray, t_player *player, t_config *config);
+void			stripe_caster(t_config *config, t_ray *ray);
+void			put_pixel_to_image(t_image *img, int x, int y, int color);
+void			put_texture(t_config *config, t_ray *ray);
 void			move_forward(t_config *config);
 void			move_backward(t_config *config);
 void			move_left(t_config *config);

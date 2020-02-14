@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:06:54 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/13 16:11:25 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:04:07 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,19 @@ void		init_game(t_config *config)
 		i++;
 	}
 	init_scene(config);
+}
+
+void		init_scene(t_config *config)
+{
+	if (!(config->scene = malloc(sizeof(t_image))))
+		exit_error("Error:\nMalloc initialisation background");
+	config->scene->width = config->width;
+	config->scene->height = config->height;
+	if (!(config->scene->img = mlx_new_image(config->init, config->scene->width,
+			config->scene->height)))
+		exit_error("Error:\nMlx_new image failed");
+	if (!(config->scene->data = mlx_get_data_addr(config->scene->img,
+		&config->scene->bpp, &config->scene->size_line,
+		&config->scene->endian)))
+		exit_error("Error:\nConvert xmp texture file failed");
 }

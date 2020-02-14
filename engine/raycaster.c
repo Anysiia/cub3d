@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 11:49:59 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/13 16:25:03 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:57:27 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,53 @@ static void		step(t_ray *ray, t_player *player)
 	}
 }
 
-static void		colorisation(t_config *config, t_ray *ray)
+static void		side(t_ray *ray, t_config *config)
 {
-	int		i;
-
-	i = ray->draw_start;
-	while (i < ray->draw_stop)
+	while (ray->hit == 0)
 	{
-		if (ray->side == 0)
-			put_pixel_to_image(config->scene, ray->stripe, i, 16711680);
-		if (ray->side == 1)
-			put_pixel_to_image(config->scene, ray->stripe, i, 255);
-		if (ray->side == 2)
-			put_pixel_to_image(config->scene, ray->stripe, i, 13648805);
-		if (ray->side == 3)
-			put_pixel_to_image(config->scene, ray->stripe, i, 15043895);
-		i++;
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += ray->delta_x;
+			ray->map_x += ray->step_x;
+			if (ray->step_x == 1)
+				ray->side = TEX_NO;
+			else if (ray->step_x == -1)
+				ray->side = TEX_SO;
+		}
+		else
+		{
+			ray->side_dist_y += ray->delta_y;
+			ray->map_y += ray->step_y;
+			if (ray->step_y == 1)
+				ray->side = TEX_WE;
+			else if (ray->step_y == -1)
+				ray->side = TEX_EA;
+		}
+		if (config->map->map[ray->map_y][ray->map_x] == '1')
+			ray->hit = 1;
+/*		else if (config->map->map[ray->map_x][ray->map_y] == '2')
+			detect_sprite(ray, config);*/
 	}
 }
 
-static void		stripe_caster(t_config *config, t_ray *ray)
+static void		dist_and_height(t_ray *ray, t_player *player, t_config *config)
+{
+	if (ray->side == TEX_NO || ray->side == TEX_SO)
+		ray->distance = (ray->map_x - player->pos_x + (1 - ray->step_x) / 2)
+		/ ray->ray_dir_x;
+	else
+		ray->distance = (ray->map_y - player->pos_y + (1 - ray->step_y) / 2)
+		/ ray->ray_dir_y;
+	ray->line_height = (int)(config->height / ray->distance);
+	ray->draw_start = (-ray->line_height / 2) + (config->height / 2);
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_stop = (ray->line_height / 2) + (config->height / 2);
+	if (ray->draw_stop >= config->height)
+		ray->draw_stop = config->height - 1;
+}
+
+void		stripe_caster(t_config *config, t_ray *ray)
 {
 	t_player	*player;
 
@@ -77,27 +104,6 @@ static void		stripe_caster(t_config *config, t_ray *ray)
 	side(ray, config);
 	dist_and_height(ray, player, config);
 	ray->img_buff[ray->stripe] = ray->distance;
-	colorisation(config, ray);
+	put_texture(config, ray);
 	ray->stripe++;
-//	put_texture(ray, config);
-}
-
-int				raycaster(t_config *config)
-{
-	t_ray		*ray;
-
-	if (!(ray = malloc(sizeof(t_ray))))
-		return (-1);
-	ft_bzero(ray, sizeof(t_ray));
-	if (!(ray->img_buff = malloc(sizeof(double) * config->width)))
-		return (-1);
-	ft_bzero(ray->img_buff, sizeof(double) * config->width);
-	color_background(config);
-	while (ray->stripe < config->width)
-		stripe_caster(config, ray);
-	put_scene(config);
-//	draw_sprite(ray, config);
-	free(ray->img_buff);
-	free(ray);
-	return (1);
 }

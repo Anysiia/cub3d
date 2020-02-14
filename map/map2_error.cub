@@ -1,9 +1,9 @@
 R 400 80
-NO ./text_nord.xpm
-SO ./text_sud.xpm
-WE ./text_ouest.xpm
-EA ./text_est.xpm
-S ./text_sprite.xpm
+NO /Users/cmorel-a/cub3d/texture/bricks1.xpm
+SO /Users/cmorel-a/cub3d/texture/bricks2.xpm
+WE /Users/cmorel-a/cub3d/texture/bricks3.xpm
+EA /Users/cmorel-a/cub3d/texture/bricks4.xpm
+S /Users/cmorel-a/cub3d/texture/blue_trees.xpm
 F 135,206,250
 C 230,255,230
 
