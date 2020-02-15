@@ -6,7 +6,7 @@
 #    By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 09:57:43 by cmorel-a          #+#    #+#              #
-#    Updated: 2020/02/14 12:01:29 by cmorel-a         ###   ########.fr        #
+#    Updated: 2020/02/15 10:20:44 by cmorel-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ MLX =		-lmlx -lm -framework OpenGL -framework AppKit -L $(MLX_PATH)
 
 MLX_PATH =	/Users/cmorel-a/cub3d
 
-INCLUDE = 	-I ./include -I $(MLX_PATH)
+INCLUDE = 	-I $(MLX_PATH)
 
 LIBFT_DIR =	libft/
 
@@ -35,7 +35,8 @@ SRCS =		cub3d.c \
 			engine/key_event.c \
 			engine/raycaster.c \
 			engine/scene.c \
-			engine/texture.c
+			engine/texture.c \
+			engine/save_bitmap.c
 
 OBJS = 		${SRCS:.c=.o}
 

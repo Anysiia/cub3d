@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:08:47 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/14 12:27:46 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/15 06:30:13 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int		main(int ac, char **av)
 	config = init_config(save);
 	map_read_cub(av[1], config);
 	init_game(config);
-//	if (config->save == 1)
-//		create_bitmap(config);
 	raycaster(config);
 	mlx_hook(config->window, 2, 1L << 0, key_pressed, config);
 	mlx_hook(config->window, 17, 1L << 17, leave_window, config);
@@ -41,7 +39,9 @@ void	exit_error(const char *msg)
 
 void	quit(t_config *config, const char *msg)
 {
-	exit_error(msg);
+	if (msg)
+		write(1, msg, ft_strlen(msg));
+	write(1, "\n", 1);
 	mlx_destroy_window(config->init, config->window);
 	exit(0);
 }

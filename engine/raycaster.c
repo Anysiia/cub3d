@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 11:49:59 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/14 12:57:27 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/15 10:23:01 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void		dist_and_height(t_ray *ray, t_player *player, t_config *config)
 		ray->draw_start = 0;
 	ray->draw_stop = (ray->line_height / 2) + (config->height / 2);
 	if (ray->draw_stop >= config->height)
-		ray->draw_stop = config->height - 1;
+		ray->draw_stop = config->height;
 }
 
 void		stripe_caster(t_config *config, t_ray *ray)
