@@ -6,19 +6,19 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:06:54 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/14 12:04:07 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/20 11:43:05 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	init_map(t_config *config)
+static void	init_sprite(t_config *config)
 {
-	if (!(config->map = malloc(sizeof(t_map))))
-		exit_error("Error:\nMalloc initialisation map");
-	config->map->width = 0;
-	config->map->height = 0;
-	config->map->map = NULL;
+	if (!(config->sprite = malloc(sizeof(t_list))))
+		exit_error("Error:\nInit config malloc list of sprites");
+	config->sprite->x = -1;
+	config->sprite->y = -1;
+	config->sprite->next = NULL;
 }
 
 static void	check_config(t_config *config)
@@ -58,7 +58,12 @@ t_config	*init_config(int save)
 		config->path_tex[i++] = NULL;
 	config->floor = -1;
 	config->ceiling = -1;
-	init_map(config);
+	if (!(config->map = malloc(sizeof(t_map))))
+		exit_error("Error:\nMalloc initialisation map");
+	config->map->width = 0;
+	config->map->height = 0;
+	config->map->map = NULL;
+	init_sprite(config);
 	return (config);
 }
 
@@ -78,7 +83,7 @@ void		init_game(t_config *config)
 		if (!(config->text[i] = malloc(sizeof(t_image))))
 			exit_error("Error:\nCannot malloc texture image");
 		if (!(config->text[i]->img = mlx_xpm_file_to_image(config->init,
-			config->path_tex[i], &config->text[i]->width, 
+			config->path_tex[i], &config->text[i]->width,
 			&config->text[i]->height)))
 			exit_error("Error:\nConvert xmp texture file failed");
 		if (!(config->text[i]->data = mlx_get_data_addr(config->text[i]->img,

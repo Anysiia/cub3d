@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/15 10:03:56 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:46:30 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,117 +34,144 @@
 # define TEX_SO		3
 # define TEX_S		4
 
-typedef struct	s_image
+# define SPRITE_MAX	256
+
+typedef struct		s_list
 {
-	void		*img;
-	int			width;
-	int			height;
-	char		*data;
-	int			bpp;
-	int			size_line;
-	int			endian;
-}				t_image;
+	int				x;
+	int				y;
+	struct s_list	*next;
+}					t_list;
 
-typedef struct	s_ray
+typedef struct		s_image
 {
-	double		cam;
-	int			stripe;
-	double		ray_dir_x;
-	double		ray_dir_y;
-	int			map_x;
-	int			map_y;
-	double		side_dist_x;
-	double		side_dist_y;
-	double		delta_x;
-	double		delta_y;
-	double		distance;
-	int			step_x;
-	int			step_y;
-	int			hit;
-	int			side;
-	int			line_height;
-	int			draw_start;
-	int			draw_stop;
-	double		*img_buff;
-}				t_ray;
+	void			*img;
+	int				width;
+	int				height;
+	char			*data;
+	int				bpp;
+	int				size_line;
+	int				endian;
+}					t_image;
 
-typedef struct	s_stripe
+typedef struct		s_ray
 {
-	int			x;
-	int			y;
-	int			start;
-	int			stop;
-	int			text_x;
-	int			text_y;
-}				t_stripe;
+	double			cam;
+	int				stripe;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	int				map_x;
+	int				map_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_x;
+	double			delta_y;
+	double			distance;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	int				line_height;
+	int				draw_start;
+	int				draw_stop;
+	double			*dist_buff;
+}					t_ray;
 
-typedef struct	s_map
+typedef struct		s_draw
 {
-	char		**map;
-	int			width;
-	int			height;
-	int			map_found;
-	int			empty_line;
-}				t_map;
+	double			sprite_x;
+	double			sprite_y;
+	int				sprite_height;
+	int				sprite_width;
+	int				draw_start_x;
+	int				draw_stop_x;
+	int				draw_start_y;
+	int				draw_stop_y;
+	int				stripe;
+}					t_draw;
 
-typedef struct	s_player
+typedef struct		s_stripe
 {
-	int			find;
-	double		pos_x;
-	double		pos_y;
-	double		dir_x;
-	double		dir_y;
-	double		plane_x;
-	double		plane_y;
-	double		move_speed;
-	double		rotate_speed;
-}				t_player;
+	int				x;
+	int				y;
+	int				start;
+	int				stop;
+	int				text_x;
+	int				text_y;
+}					t_stripe;
 
-typedef struct	s_config
+typedef struct		s_map
 {
-	void		*init;
-	void		*window;
-	int			save;
-	int			width;
-	int			height;
-	char		*path_tex[NB_TEX];
-	int			floor;
-	int			ceiling;
-	t_map		*map;
-	t_player	*player;
-	t_image		*text[NB_TEX];
-	t_image		*scene;
-}				t_config;
+	char			**map;
+	int				width;
+	int				height;
+	int				map_found;
+	int				empty_line;
+}					t_map;
 
-t_config		*init_config(int save);
-int				check_arg(int ac, char **av, int save);
-void			exit_error(const char *msg);
-void			quit(t_config *config, const char *msg);
-void			init_game(t_config *config);
-void			init_scene(t_config *config);
-char			*map_read_cub(const char *cub, t_config *config);
-int				map_format(t_config *config, char *strmap);
-int				len_first_end_one(const char *str);
-void			only_char_in_line(const char *line, char c);
-void			check_last_line(t_config *config);
-void			find_player(t_config *config);
-void			resolution(char *line, t_config *config);
-void			color(char *line, t_config *config, char c);
-void			texture_path(char *line, t_config *config);
+typedef struct		s_player
+{
+	int				find;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			move_speed;
+	double			rotate_speed;
+}					t_player;
 
-int				raycaster(t_config *config);
-void			stripe_caster(t_config *config, t_ray *ray);
-void			put_texture(t_config *config, t_ray *ray);
-int				save_bitmap(t_config *config, t_ray *ray);
-void			move_forward(t_config *config);
-void			move_backward(t_config *config);
-void			move_left(t_config *config);
-void			move_right(t_config *config);
-void			turn_right(t_config *config);
-void			turn_left(t_config *config);
-int				key_pressed(int key, t_config *config);
-int				leave_window(t_config *config);
+typedef struct		s_config
+{
+	void			*init;
+	void			*window;
+	int				save;
+	int				width;
+	int				height;
+	char			*path_tex[NB_TEX];
+	int				floor;
+	int				ceiling;
+	t_map			*map;
+	t_player		*player;
+	t_image			*text[NB_TEX];
+	t_image			*scene;
+	t_list			*sprite;
+}					t_config;
 
-void			create_bitmap(t_config *config);
+t_config			*init_config(int save);
+int					check_arg(int ac, char **av, int save);
+void				exit_error(const char *msg);
+void				quit(t_config *config, const char *msg);
+void				init_game(t_config *config);
+void				init_scene(t_config *config);
+char				*map_read_cub(const char *cub, t_config *config);
+int					map_format(t_config *config, char *strmap);
+int					len_first_end_one(const char *str);
+void				only_char_in_line(const char *line, char c);
+void				check_last_line(t_config *config);
+void				find_player(t_config *config);
+void				resolution(char *line, t_config *config);
+void				color(char *line, t_config *config, char c);
+void				texture_path(char *line, t_config *config);
+
+int					raycaster(t_config *config);
+void				stripe_caster(t_config *config, t_ray *ray);
+void				put_texture(t_config *config, t_ray *ray);
+void				handle_sprite(t_config *config, t_ray *ray);
+void				sort_dist_sprite(t_config *config);
+void				ft_lstdel_firstnode(t_config *config);
+void				put_sprite(t_config *config, t_ray *ray);
+int					save_bitmap(t_config *config, t_ray *ray);
+void				move_forward(t_config *config);
+void				move_backward(t_config *config);
+void				move_left(t_config *config);
+void				move_right(t_config *config);
+void				turn_right(t_config *config);
+void				turn_left(t_config *config);
+int					key_pressed(int key, t_config *config);
+int					leave_window(t_config *config);
+
+void				create_bitmap(t_config *config);
 
 #endif

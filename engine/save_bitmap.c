@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 06:17:33 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/15 11:04:18 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/20 10:12:23 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	dib_header(t_image *scene, int fd)
 	write(fd, &plane, 2);
 	write(fd, &scene->bpp, 2);
 	full = 28;
-	i = 0; 
+	i = 0;
 	while (i++ < full)
 		write(fd, "\0", 1);
 }
@@ -101,7 +101,7 @@ int			save_bitmap(t_config *config, t_ray *ray)
 	reverse_line(config->scene);
 	copy_data_to_bitmap(config->scene, fd);
 	close(fd);
-	free(ray->img_buff);
+	free(ray->dist_buff);
 	free(ray);
 	quit(config, "Bitmap file created, name : cub3d.bmp");
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:08:47 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/15 06:30:13 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/20 09:19:18 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	quit(t_config *config, const char *msg)
 	if (msg)
 		write(1, msg, ft_strlen(msg));
 	write(1, "\n", 1);
-	mlx_destroy_window(config->init, config->window);
-	exit(0);
+	leave_window(config);
 }
 
 int		check_arg(int ac, char **av, int save)

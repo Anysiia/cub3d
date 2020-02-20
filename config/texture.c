@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:11:53 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/13 09:49:08 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/20 10:10:47 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void			texture_path(char *str, t_config *config)
 		check_texture(path, TEX_EA, config);
 	else if (str[0] == 'S' && str[1] == ' ')
 		check_texture(path, TEX_S, config);
-	else if ((str[0] == 'N' && str[1] != 'O') 
+	else if ((str[0] == 'N' && str[1] != 'O')
 		|| (str[0] == 'W' && str[1] != 'E') || (str[0] == 'E' && str[1] == 'A')
 		|| (str[0] == 'S' && !(ft_test_set(str[1], " O"))))
 		exit_error("Error:\nInvalid format on path texture");

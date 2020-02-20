@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 10:30:19 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/15 10:12:46 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/20 09:07:08 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int				raycaster(t_config *config)
 	if (!(ray = malloc(sizeof(t_ray))))
 		return (-1);
 	ft_bzero(ray, sizeof(t_ray));
-	if (!(ray->img_buff = malloc(sizeof(double) * config->width)))
+	if (!(ray->dist_buff = malloc(sizeof(double) * config->width)))
 		return (-1);
-	ft_bzero(ray->img_buff, sizeof(double) * config->width);
+	ft_bzero(ray->dist_buff, sizeof(double) * config->width);
 	color_background(config);
 	while (ray->stripe < config->width)
 		stripe_caster(config, ray);
@@ -80,7 +80,7 @@ int				raycaster(t_config *config)
 	if (config->save == 1)
 		save_bitmap(config, ray);
 	put_scene(config);
-	free(ray->img_buff);
+	free(ray->dist_buff);
 	free(ray);
 	return (1);
 }
