@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 11:49:59 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/20 12:41:43 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/21 09:57:01 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ static void		side(t_ray *ray, t_config *config)
 		}
 		if (config->map->map[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
-/*		else if (config->map->map[ray->map_x][ray->map_y] == '2')
-			handle_sprite(ray, config);*/
+		else if (config->map->map[ray->map_y][ray->map_x] == '2')
+			handle_sprite(config, ray);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/20 14:46:30 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/21 11:46:12 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct		s_list
 {
 	int				x;
 	int				y;
+	double			dist;
 	struct s_list	*next;
 }					t_list;
 
@@ -81,8 +82,8 @@ typedef struct		s_draw
 {
 	double			sprite_x;
 	double			sprite_y;
-	int				sprite_height;
-	int				sprite_width;
+	double			sprite_height;
+	double			sprite_width;
 	int				draw_start_x;
 	int				draw_stop_x;
 	int				draw_start_y;
