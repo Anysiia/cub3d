@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/21 11:46:12 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/22 15:23:07 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,19 @@ typedef struct		s_draw
 {
 	double			sprite_x;
 	double			sprite_y;
+	double			mat_x;
+	double			mat_y;
 	double			sprite_height;
 	double			sprite_width;
+	double			screen_x;
 	int				draw_start_x;
 	int				draw_stop_x;
 	int				draw_start_y;
 	int				draw_stop_y;
 	int				stripe;
+	int				tex_x;
+	int				tex_y;
+	int				y;
 }					t_draw;
 
 typedef struct		s_stripe
@@ -160,8 +166,7 @@ int					raycaster(t_config *config);
 void				stripe_caster(t_config *config, t_ray *ray);
 void				put_texture(t_config *config, t_ray *ray);
 void				handle_sprite(t_config *config, t_ray *ray);
-void				sort_dist_sprite(t_config *config);
-void				ft_lstdel_firstnode(t_config *config);
+void				sort_sprite(t_config *config, int lst_size);
 void				put_sprite(t_config *config, t_ray *ray);
 int					save_bitmap(t_config *config, t_ray *ray);
 void				move_forward(t_config *config);
@@ -174,5 +179,7 @@ int					key_pressed(int key, t_config *config);
 int					leave_window(t_config *config);
 
 void				create_bitmap(t_config *config);
+int					ft_lstsize(t_config *config);
+void				ft_lstdel_firstnode(t_config *config);
 
 #endif
