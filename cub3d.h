@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/22 15:23:07 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/25 12:34:23 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ t_config			*init_config(int save);
 int					check_arg(int ac, char **av, int save);
 void				exit_error(const char *msg);
 void				quit(t_config *config, const char *msg);
+void				init_sprite(t_config *config);
 void				init_game(t_config *config);
 void				init_scene(t_config *config);
 char				*map_read_cub(const char *cub, t_config *config);
@@ -164,6 +165,7 @@ void				texture_path(char *line, t_config *config);
 
 int					raycaster(t_config *config);
 void				stripe_caster(t_config *config, t_ray *ray);
+void				put_pixel_to_image(t_image *img, int x, int y, int color);
 void				put_texture(t_config *config, t_ray *ray);
 void				handle_sprite(t_config *config, t_ray *ray);
 void				sort_sprite(t_config *config, int lst_size);

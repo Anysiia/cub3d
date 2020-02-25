@@ -6,7 +6,7 @@
 #    By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 09:57:43 by cmorel-a          #+#    #+#              #
-#    Updated: 2020/02/22 11:52:51 by cmorel-a         ###   ########.fr        #
+#    Updated: 2020/02/25 10:13:38 by cmorel-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS =		cub3d.c \
 			engine/scene.c \
 			engine/texture.c \
 			engine/sprite.c \
-			engine/utils_sprite2.c \
+			engine/utils_sprite.c \
 			engine/save_bitmap.c
 
 OBJS = 		${SRCS:.c=.o}

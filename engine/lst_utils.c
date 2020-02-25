@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 12:38:56 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/22 12:51:46 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/25 11:48:30 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_lstsize(t_config *config)
 	return (i);
 }
 
-void		ft_lstdel_firstnode(t_config *config)
+void	ft_lstdel_firstnode(t_config *config)
 {
 	t_list		*todelete;
 
@@ -40,5 +40,3 @@ void		ft_lstdel_firstnode(t_config *config)
 		free(todelete);
 	}
 }
-
-

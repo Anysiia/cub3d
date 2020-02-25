@@ -6,20 +6,11 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:06:54 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/21 09:50:26 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/25 11:55:22 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-static void	init_sprite(t_config *config)
-{
-	if (!(config->sprite = malloc(sizeof(t_list))))
-		exit_error("Error:\nInit config malloc list of sprites");
-	config->sprite->x = -1;
-	config->sprite->y = -1;
-	config->sprite->next = NULL;
-}
 
 static void	check_config(t_config *config)
 {
@@ -41,6 +32,15 @@ static void	check_config(t_config *config)
 		exit_error("Error:\nColor of floor not found on .cub file");
 	if (config->ceiling == -1)
 		exit_error("Error:\nColor of ceiling not found on .cub file");
+}
+
+void		init_sprite(t_config *config)
+{
+	if (!(config->sprite = malloc(sizeof(t_list))))
+		exit_error("Error:\nInit config malloc list of sprites");
+	config->sprite->x = -1;
+	config->sprite->y = -1;
+	config->sprite->next = NULL;
 }
 
 t_config	*init_config(int save)

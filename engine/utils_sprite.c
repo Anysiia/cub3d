@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 14:33:42 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/22 15:01:09 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/25 11:50:48 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,42 @@ static double	dist_cub_to_player(t_config *config, t_list *sprite)
 	return (cube);
 }
 
+static int		is_sprite_in_list(t_config *config, t_list *sprite)
+{
+	t_list	*the_list;
+
+	the_list = config->sprite;
+	while (the_list)
+	{
+		if (the_list->x == sprite->x && the_list->y == sprite->y)
+			return (1);
+		the_list = the_list->next;
+	}
+	return (0);
+}
+
 static void		sort_new_sprite(t_config *config, t_list *new)
 {
-	t_list	*working;
-	t_list	*top_list;
+	t_list	*working_list;
+	t_list	*previous_list;
 
-	top_list = config->sprite;
-	if (config->sprite->dist < new->dist)
-	{
-		new->next = config->sprite;
-		config->sprite = new;
-		return ;
-	}
-	working = config->sprite;
-	while (working->next && working->next->dist > new->dist)
-		working = working->next;
-	if (working->x == new->x && working->y == new->y)
+	working_list = config->sprite;
+	previous_list = NULL;
+	if (is_sprite_in_list(config, new))
 	{
 		free(new);
 		return ;
 	}
-	new->next = working;
-	working = new;
-	config->sprite = top_list;
+	while (working_list && working_list->dist > new->dist)
+	{
+		previous_list = working_list;
+		working_list = working_list->next;
+	}
+	new->next = working_list;
+	if (previous_list)
+		previous_list->next = new;
+	else
+		config->sprite = new;
 }
 
 void			handle_sprite(t_config *config, t_ray *ray)
