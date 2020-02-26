@@ -6,7 +6,7 @@
 #    By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 09:57:43 by cmorel-a          #+#    #+#              #
-#    Updated: 2020/02/25 10:13:38 by cmorel-a         ###   ########.fr        #
+#    Updated: 2020/02/26 18:18:17 by cmorel-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRCS =		cub3d.c \
 			config/player.c \
 			config/resolution.c \
 			config/texture.c \
-			config/utils.c \
+			config/map_validity.c \
 			engine/move_player.c \
 			engine/key_event.c \
 			engine/raycaster.c \

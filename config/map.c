@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 12:25:52 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/20 10:08:20 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/26 18:06:04 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int		create_map(t_config *config)
 	char	**map;
 
 	if (!(map = (char **)malloc(sizeof(char *) * config->map->height + 1)))
-		exit_error("Error:\nCannot malloc map");
+		return (0);
 	i = 0;
 	j = config->map->width + 2;
 	while (i < config->map->height + 1)
@@ -52,7 +52,7 @@ static int		create_map(t_config *config)
 			while (--i == 0)
 				free(map[i]);
 			free(*map);
-			exit_error("Error:\nCannot malloc map");
+			return (0);
 		}
 		ft_bzero(map[i], j);
 		i++;
@@ -87,46 +87,24 @@ static void		copy_map(t_config *config, char *str_map)
 	}
 }
 
-static void		map_validity(t_config *config)
-{
-	int		i;
-	int		len_line;
-	int		len_previous_line;
-
-	only_char_in_line(config->map->map[0], '1');
-	i = 1;
-	while (i < config->map->height - 1)
-	{
-		len_previous_line = ft_strlen(config->map->map[i - 1]);
-		len_line = len_first_end_one(config->map->map[i]);
-		if (len_previous_line < len_line)
-			exit_error("Error:\nMap must be close by walls");
-		if (len_previous_line > len_line)
-		{
-			len_line--;
-			while (len_line < len_previous_line)
-			{
-				if (config->map->map[i - 1][len_line] != '1')
-					exit_error("Error:\nMap must be close by walls");
-				len_line++;
-			}
-		}
-		i++;
-	}
-	check_last_line(config);
-}
-
 int				map_format(t_config *config, char *strmap)
 {
 	size_map(strmap, config);
-	if (config->map->height < 3 || config->map->width < 3)
+	if (config->map->height < 3 || config->map->width < 3
+		|| config->map->height > 128 || config->map->width > 128)
+	{
+		free(strmap);
 		exit_error("Error:\nMap is too small");
-	if (config->map->height > 128 || config->map->width > 128)
-		exit_error("Error:\nMap is too big");
-	create_map(config);
+	}
+	if (!create_map(config))
+	{
+		free(strmap);
+		exit_error("Error:\nMalloc map");
+	}
 	copy_map(config, strmap);
 	free(strmap);
-	map_validity(config);
+	if (!map_validity(config))
+		exit_error("Error:\nMap must be close by walls");
 	find_player(config);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:08:47 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/22 15:07:12 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/26 13:03:05 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		main(int ac, char **av)
 {
 	int			save;
 	t_config	*config;
-	
+
 	save = (ac == 3 && !ft_strcmp(av[2], "--save"));
 	check_arg(ac, av, save);
 	config = init_config(save);

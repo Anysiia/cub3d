@@ -6,13 +6,13 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 12:42:07 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/25 15:49:15 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/26 13:01:52 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void			calcul_sprite_values(t_config *config, t_draw *draw)
+static void		calcul_sprite_values(t_config *config, t_draw *draw)
 {
 	double		inv_det;
 
@@ -46,17 +46,19 @@ static void		put_sprite_pixel(t_config *config, t_draw *draw)
 	int		tmp;
 	int		xy_text;
 	int		xy_scene;
+	int		tex_x;
+	int		tex_y;
 
-	draw->tex_x = (int)(config->text[TEX_S]->size_line * (draw->stripe
+	tex_x = (int)(config->text[TEX_S]->size_line * (draw->stripe
 		- (-draw->sprite_width / 2 + draw->screen_x))
 		* config->text[TEX_S]->width / draw->sprite_width)
 		/ config->text[TEX_S]->size_line;
 	tmp = draw->y * config->text[TEX_S]->size_line
 		- config->height * (config->text[TEX_S]->size_line / 2)
 		+ draw->sprite_height * config->text[TEX_S]->size_line / 2;
-	draw->tex_y = ((tmp * config->text[TEX_S]->height) / draw->sprite_height)
+	tex_y = ((tmp * config->text[TEX_S]->height) / draw->sprite_height)
 		/ config->text[TEX_S]->size_line;
-	xy_text = draw->tex_y * config->text[TEX_S]->size_line + draw->tex_x
+	xy_text = tex_y * config->text[TEX_S]->size_line + tex_x
 		* config->text[TEX_S]->bpp / 8;
 	xy_scene = draw->y * config->scene->size_line + draw->stripe
 		* config->scene->bpp / 8;
@@ -72,10 +74,10 @@ static void		draw_sprite(t_config *config, t_ray *ray, t_draw *draw)
 	calcul_sprite_values(config, draw);
 	while (draw->stripe < draw->draw_stop_x)
 	{
-		if (draw->mat_y > 0 && draw->stripe > 0 && draw->stripe < config->width
+		if (draw->mat_y > 0 && draw->stripe >= 0 && draw->stripe < config->width
 			&& draw->mat_y < ray->dist_buff[draw->stripe])
 		{
-			draw->y = draw->draw_start_y;
+			draw->y = (draw->draw_start_y == 0 ? 0 : draw->draw_start_y + 1);
 			while (draw->y < draw->draw_stop_y)
 			{
 				put_sprite_pixel(config, draw);
@@ -101,5 +103,3 @@ void			put_sprite(t_config *config, t_ray *ray)
 	init_sprite(config);
 	free(draw);
 }
-
-

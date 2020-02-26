@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/25 12:34:23 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/26 17:45:52 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ typedef struct		s_draw
 	int				draw_start_y;
 	int				draw_stop_y;
 	int				stripe;
-	int				tex_x;
-	int				tex_y;
 	int				y;
 }					t_draw;
 
@@ -155,9 +153,7 @@ void				init_game(t_config *config);
 void				init_scene(t_config *config);
 char				*map_read_cub(const char *cub, t_config *config);
 int					map_format(t_config *config, char *strmap);
-int					len_first_end_one(const char *str);
-void				only_char_in_line(const char *line, char c);
-void				check_last_line(t_config *config);
+int					map_validity(t_config *config);
 void				find_player(t_config *config);
 void				resolution(char *line, t_config *config);
 void				color(char *line, t_config *config, char c);
