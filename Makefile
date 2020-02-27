@@ -6,7 +6,7 @@
 #    By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 09:57:43 by cmorel-a          #+#    #+#              #
-#    Updated: 2020/02/26 18:18:17 by cmorel-a         ###   ########.fr        #
+#    Updated: 2020/02/27 14:00:30 by cmorel-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,29 +16,29 @@ CFLAGS = 	-Wall -Werror -Wextra
 
 MLX =		-lmlx -lm -framework OpenGL -framework AppKit -L $(MLX_PATH)
 
-MLX_PATH =	/Users/cmorel-a/cub3d
+MLX_PATH =	mlx/
 
-INCLUDE = 	-I $(MLX_PATH)
+INCLUDE = 	-I $(MLX_PATH) -I ./includes/
 
 LIBFT_DIR =	libft/
 
-SRCS =		cub3d.c \
-			config/init_config.c \
-			config/color.c \
-			config/parse_cub.c \
-			config/map.c \
-			config/player.c \
-			config/resolution.c \
-			config/texture.c \
-			config/map_validity.c \
-			engine/move_player.c \
-			engine/key_event.c \
-			engine/raycaster.c \
-			engine/scene.c \
-			engine/texture.c \
-			engine/sprite.c \
-			engine/utils_sprite.c \
-			engine/save_bitmap.c
+SRCS =		srcs/cub3d.c \
+			srcs/config/init_config.c \
+			srcs/config/color.c \
+			srcs/config/parse_cub.c \
+			srcs/config/map.c \
+			srcs/config/player.c \
+			srcs/config/resolution.c \
+			srcs/config/texture.c \
+			srcs/config/map_validity.c \
+			srcs/engine/move_player.c \
+			srcs/engine/key_event.c \
+			srcs/engine/raycaster.c \
+			srcs/engine/scene.c \
+			srcs/engine/texture.c \
+			srcs/engine/sprite.c \
+			srcs/engine/utils_sprite.c \
+			srcs/engine/save_bitmap.c
 
 OBJS = 		${SRCS:.c=.o}
 
@@ -49,14 +49,17 @@ all:	$(NAME)
 
 $(NAME):$(OBJS)
 		@$(MAKE) -C ./libft/
+		@$(MAKE) -C ./mlx/
 		@gcc $(OBJS) $(INCLUDE) -O3 $(CFLAGS) $(MLX) ./libft/libft.a -o $(NAME)
 
 clean:
 		@rm -rf $(OBJS)
 		@$(MAKE) clean -C ./libft/
+		@$(MAKE) clean -C ./mlx/
 
 fclean: clean
 		@$(MAKE) fclean -C ./libft/
+		@$(MAKE) clean -C ./mlx/
 		@rm -rf $(NAME)
 		@rm -rf cub3d.bmp
 

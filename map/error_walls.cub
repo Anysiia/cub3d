@@ -1,4 +1,4 @@
-R 400 200
+R 400 80
 NO /Users/cmorel-a/cub3d/texture/bricks1.xpm
 SO /Users/cmorel-a/cub3d/texture/bricks2.xpm
 WE /Users/cmorel-a/cub3d/texture/bricks3.xpm
@@ -8,11 +8,8 @@ F 135,206,250
 C 230,255,230
 
 1 1 1 1 1 1 1 1 1
-1 0 0 0 0 0 0 S 1
-1 0 0 0 0 0 0 0 1
+1 0 0 0 1 1 1
+1 1 1 0 1
 1 0 0 0 1 1 1 1 1
-1 0 0 0 1
-1 2 0 0 1
-1 0 0 2 1 1 1 1 1
-1 0 0 0 0 0 0 0 1
-1 1 1 1 1 1 1 1 1
+1 0 0 E 0 0 0 0 1
+1 1 1 1 1 1 1 1 
