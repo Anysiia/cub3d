@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_sprite.c                                     :+:      :+:    :+:   */
+/*   test_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/20 14:33:42 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/27 14:06:16 by cmorel-a         ###   ########.fr       */
+/*   Created: 2020/02/28 10:34:02 by cmorel-a          #+#    #+#             */
+/*   Updated: 2020/02/28 10:37:52 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static double	dist_cub_to_player(t_config *config, t_list *sprite)
 	return (cube);
 }
 
-static int		is_sprite_in_list(t_config *config, t_list *sprite)
+static int		is_sprite_in_list(t_config *config, t_ray *ray)
 {
 	t_list	*the_list;
 
 	the_list = config->sprite;
 	while (the_list)
 	{
-		if (the_list->x == sprite->x && the_list->y == sprite->y)
+		if (the_list->x == ray->map_x && the_list->y == ray->map_y)
 			return (1);
 		the_list = the_list->next;
 	}
@@ -44,11 +44,6 @@ static void		sort_new_sprite(t_config *config, t_list *new)
 
 	working_list = config->sprite;
 	previous_list = NULL;
-	if (is_sprite_in_list(config, new))
-	{
-		free(new);
-		return ;
-	}
 	while (working_list && working_list->dist > new->dist)
 	{
 		previous_list = working_list;
@@ -73,6 +68,8 @@ void			handle_sprite(t_config *config, t_ray *ray)
 		return ;
 	}
 	if (config->sprite->x == ray->map_x && config->sprite->y == ray->map_y)
+		return ;
+	if (is_sprite_in_list(config, ray))
 		return ;
 	if (!(new = (t_list *)malloc(sizeof(t_list))))
 	{
