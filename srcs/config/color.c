@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:37:30 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/27 14:01:58 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/29 09:50:42 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	one_color(char *line, int *i)
 
 	color = ft_atoi(&line[*i]);
 	if (color < 0 || color > 255)
-		exit_error("Error:\nComponent color must be between 0 and 255");
+		exit_error("Error:\nEach component of color must be between 0 and 255");
 	while (ft_isdigit(line[*i]))
 		*i += 1;
 	*i += 1;

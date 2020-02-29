@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 12:42:07 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/27 14:05:45 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/29 13:03:52 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,19 @@ static void		draw_sprite(t_config *config, t_ray *ray, t_draw *draw)
 			}
 		}
 		draw->stripe++;
+	}
+}
+
+static void		ft_lstdel_firstnode(t_config *config)
+{
+	t_list		*todelete;
+
+	if (config->sprite)
+	{
+		todelete = config->sprite;
+		config->sprite = config->sprite->next;
+		todelete->next = NULL;
+		free(todelete);
 	}
 }
 

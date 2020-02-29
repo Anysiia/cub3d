@@ -6,11 +6,27 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 10:30:19 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/27 14:05:32 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/29 13:01:05 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static void		put_pixel_to_image(t_image *img, int x, int y, int color)
+{
+	unsigned char *src;
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+
+	src = (unsigned char *)&color;
+	r = src[0];
+	g = src[1];
+	b = src[2];
+	img->data[y * img->size_line + x * img->bpp / 8] = r;
+	img->data[y * img->size_line + x * img->bpp / 8 + 1] = g;
+	img->data[y * img->size_line + x * img->bpp / 8 + 2] = b;
+}
 
 static void		color_background(t_config *config)
 {
@@ -47,21 +63,6 @@ static void		put_scene(t_config *config)
 		config->scene->img, 0, 0);
 }
 
-void			put_pixel_to_image(t_image *img, int x, int y, int color)
-{
-	unsigned char *src;
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
-
-	src = (unsigned char *)&color;
-	r = src[0];
-	g = src[1];
-	b = src[2];
-	img->data[y * img->size_line + x * img->bpp / 8] = r;
-	img->data[y * img->size_line + x * img->bpp / 8 + 1] = g;
-	img->data[y * img->size_line + x * img->bpp / 8 + 2] = b;
-}
 
 int				raycaster(t_config *config)
 {

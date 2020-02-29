@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:34:02 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/28 10:37:52 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/29 13:04:22 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,4 @@ void			handle_sprite(t_config *config, t_ray *ray)
 	new->y = ray->map_y;
 	new->dist = dist_cub_to_player(config, new);
 	sort_new_sprite(config, new);
-}
-
-void			ft_lstdel_firstnode(t_config *config)
-{
-	t_list		*todelete;
-
-	if (config->sprite)
-	{
-		todelete = config->sprite;
-		config->sprite = config->sprite->next;
-		todelete->next = NULL;
-		free(todelete);
-	}
 }

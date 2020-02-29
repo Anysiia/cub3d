@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:22:48 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/27 14:09:11 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/29 13:04:56 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ void				texture_path(char *line, t_config *config);
 
 int					raycaster(t_config *config);
 void				stripe_caster(t_config *config, t_ray *ray);
-void				put_pixel_to_image(t_image *img, int x, int y, int color);
 void				put_texture(t_config *config, t_ray *ray);
 void				handle_sprite(t_config *config, t_ray *ray);
 void				sort_sprite(t_config *config, int lst_size);
@@ -177,7 +176,5 @@ int					key_pressed(int key, t_config *config);
 int					leave_window(t_config *config);
 
 void				create_bitmap(t_config *config);
-int					ft_lstsize(t_config *config);
-void				ft_lstdel_firstnode(t_config *config);
 
 #endif

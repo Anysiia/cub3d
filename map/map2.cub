@@ -1,11 +1,11 @@
 R 1200 800
 SO /Users/cmorel-a/cub3d/texture/wood1.xpm
-NO /Users/cmorel-a/cub3d/texture/wood2.xpm
-WE /Users/cmorel-a/cub3d/texture/wood3.xpm
-EA /Users/cmorel-a/cub3d/texture/wood4.xpm
+NO /Users/cmorel-a/cub3d/texture/slab2.xpm
+WE /Users/cmorel-a/cub3d/texture/basket.xpm
+EA /Users/cmorel-a/cub3d/texture/bricks5.xpm
 S /Users/cmorel-a/cub3d/texture/blue_trees.xpm
-F 135,206,250
-C 230,255,230
+F 172,115,57
+C 204,230,255
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
