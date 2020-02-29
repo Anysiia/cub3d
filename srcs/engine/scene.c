@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 10:30:19 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/29 13:01:05 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/29 16:09:22 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void		put_scene(t_config *config)
 	mlx_put_image_to_window(config->init, config->window,
 		config->scene->img, 0, 0);
 }
-
 
 int				raycaster(t_config *config)
 {
