@@ -6,34 +6,11 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 12:25:52 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/27 14:02:36 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/29 14:01:57 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-static void		size_map(char *map, t_config *config)
-{
-	int		i;
-	int		height;
-	int		width;
-
-	i = 0;
-	height = 0;
-	width = 0;
-	while (map[i++])
-	{
-		if (map[i] == '\n')
-		{
-			height++;
-			if (config->map->width < width)
-				config->map->width = width;
-			width = -1;
-		}
-		width++;
-	}
-	config->map->height = height;
-}
 
 static int		create_map(t_config *config)
 {
@@ -89,7 +66,6 @@ static void		copy_map(t_config *config, char *str_map)
 
 int				map_format(t_config *config, char *strmap)
 {
-	size_map(strmap, config);
 	if (config->map->height < 3 || config->map->width < 3
 		|| config->map->height > 128 || config->map->width > 128)
 	{

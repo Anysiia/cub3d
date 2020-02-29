@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:23:45 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/27 14:03:12 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/02/29 14:04:29 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,19 @@ static char	*clean_string(char *line)
 static void	line_map_save(char *line, char **map, t_config *config)
 {
 	char	*clean_map;
+	int		width;
 
 	if (config->map->map_found == 1 && config->map->empty_line == 1 && line[0])
 		exit_error("Error:\nInvalid map : empty line");
 	config->map->map_found = 1;
 	if (!(clean_map = clean_string(line)))
 		exit_error("Error:\nMap must be close by walls");
+	config->map->height++;
+	width = ft_strlen(clean_map);
+	if (config->map->height > 128 || width > 128)
+		exit_error("Error:\nMap is bigger than 128 * 128");
+	if (width > config->map->width)
+		config->map->width = width;
 	if (!(*map = ft_free_s1_join(*map, clean_map)))
 		exit_error("Error:\nMalloc map error");
 	if (!(*map = ft_free_s1_join(*map, "\n")))
