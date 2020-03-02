@@ -14,6 +14,7 @@
 
 static char	*clean_string(char *line)
 {
+	char	*clean;
 	int		len;
 	int		i;
 	int		j;
@@ -21,19 +22,20 @@ static char	*clean_string(char *line)
 	i = 0;
 	j = 0;
 	len = ft_strlen(line);
+	if (!(clean = (char *)malloc(sizeof(clean) * (len / 2 + 1))))
+		exit_error("Error:\nMalloc clean line of map");
 	while (line[i])
 	{
 		if (!(ft_test_set(line[i], " NSEW012")))
 			exit_error("Error:\nInvalid character on map");
-		if (line[i] == ' ')
-			i++;
-		else
-			line[j++] = line[i++];
+		if (line[i + 1] != ' ' && line[i + 1] != '\0')
+			exit_error("Error:\nElement of map must be separated by one space");
+		clean[j] = line[i];
+		i += 2;
+		j++;
 	}
-	if (line[j - 1] != '1')
-		return (NULL);
-	while (j < len)
-		line[j++] = '\0';
+	clean[i] = '\0';
+	free(line);
 	return (line);
 }
 
@@ -61,17 +63,25 @@ static void	line_map_save(char *line, char **map, t_config *config)
 
 static void	config_map(char *line, t_config *config, char **map)
 {
-	if (config->map->map_found == 1 && line[0] != '\0' && line[0] != '1')
+	int		i;
+
+	i = 0;
+	if (config->map->map_found == 1 && line[0] != '\0' && line[0] != '1'
+		&& line[0] != ' ')
 		exit_error("Error:\nInvalid character in map");
-	if (line[0] == 'R')
+	while (line[i] == ' ')
+		i++;
+	if (ft_test_set(line[i], "RNSWEFC"))
+		line = ft_free_strtrim(line, " ");
+	if (line[i] == 'R')
 		resolution(line, config);
-	if (ft_test_set(line[0], "NSWE"))
+	if (ft_test_set(line[i], "NSWE"))
 		texture_path(line, config);
-	if (line[0] == 'F')
+	if (line[i] == 'F')
 		color(line, config, 'F');
-	if (line[0] == 'C')
+	if (line[i] == 'C')
 		color(line, config, 'C');
-	if (line[0] == '1')
+	if (line[i] == '1')
 		line_map_save(line, map, config);
 	if ((ft_test_set(line[0], "RNSWESFC1") == 0) && line[0] != '\0')
 		exit_error("Error:\nInvalid character on .cub file");
@@ -90,7 +100,6 @@ char		*map_read_cub(const char *cub, t_config *config)
 		exit_error("Error:\nCannot malloc map string");
 	while ((res = get_next_line(fd, &line)) >= 0)
 	{
-		line = ft_free_strtrim(line, " ");
 		if (config->map->map_found == 1 && line[0] == '\0')
 			config->map->empty_line = 1;
 		config_map(line, config, &map);

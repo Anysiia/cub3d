@@ -15,25 +15,29 @@
 static int	check_color_line(char *str, char c)
 {
 	int		i;
-	int		j;
 
-	if (!str || str[0] != c)
-		return (0);
 	i = 1;
-	j = 0;
 	while (str[i] == ' ')
 		i++;
-	while (ft_isdigit(str[i]) || str[i] == ',')
-	{
-		if (str[i] == ',')
-			j++;
+	while (ft_isdigit(str[i]))
 		i++;
-	}
+	if (str[i] != ',')
+		return (0);
 	while (str[i] == ' ')
+		i++;
+	if (!ft_isdigit(str[i]))
+		return (0);
+	while (ft_isdigit(str[i]))
+		i++;
+	if (str[i] != ',')
+		return (0);
+	while (str[i] == ' ')
+		i++;
+	if (!ft_isdigit(str[i]))
+		return (0);
+	while (ft_isdigit(str[i]))
 		i++;
 	if (str[i] != '\0')
-		return (0);
-	if (j != 2)
 		return (0);
 	return (1);
 }
@@ -45,6 +49,8 @@ static int	one_color(char *line, int *i)
 	color = ft_atoi(&line[*i]);
 	if (color < 0 || color > 255)
 		exit_error("Error:\nEach component of color must be between 0 and 255");
+	while (line[*i] == ' ')
+		*i += 1;
 	while (ft_isdigit(line[*i]))
 		*i += 1;
 	*i += 1;
