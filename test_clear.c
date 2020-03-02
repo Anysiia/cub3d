@@ -37,7 +37,6 @@ void	exit_error(const char *msg)
 
 char	*clean_string(char *line)
 {
-	char	*clean;
 	int		len;
 	int		i;
 	int		j;
@@ -45,26 +44,19 @@ char	*clean_string(char *line)
 	i = 0;
 	j = 0;
 	len = ft_strlen(line);
-	if (!(clean = (char *)malloc(sizeof(clean) * (len / 2 + 2))))
-		exit_error("Error:\nMalloc clean line of map");
-	while (line[i])
-		if (!(ft_test_set(line[i++], " NSEW012")))
-			exit_error("Error:\nInvalid character on map");
-	i = 0;
-	while (line[i])
+	while (i < len)
 	{
-		write(1, &line[i], 1);
+		if (!(ft_test_set(line[i], " NSEW012")))
+			exit_error("Error:\nInvalid character on map");
 		if (line[i + 1] != ' ' && line[i + 1] != '\0')
 			exit_error("Error:\nElement of map must be separated by one space");
-		clean[j] = line[i];
+		line[j] = line[i];
 		i += 2;
 		j++;
 	}
-	clean[i] = '\0';
+	line[j] = '\0';
 	return (line);
 }
-
-
 
 int main(int ac, char **av)
 {

@@ -34,8 +34,6 @@
 # define TEX_SO		3
 # define TEX_S		4
 
-# define SPRITE_MAX	256
-
 typedef struct		s_list
 {
 	int				x;
