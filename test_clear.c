@@ -58,11 +58,34 @@ char	*clean_string(char *line)
 	return (line);
 }
 
+size_t	index_last_one_in_line(const char *line)
+{
+	size_t	i;
+
+	i = ft_strlen(line);
+	i--;
+	while (line[i] == ' ')
+		i--;
+	if (line[i] != '1')
+		exit_error("Error:\nMap must be close by walls");
+	return (i);
+}
+
+size_t	index_first_one_in_line(const char *line)
+{
+	size_t	i;
+
+	i = 0;
+	while (line[i] && line[i] == ' ')
+		i++;
+	if (line[i] != '1')
+		exit_error("Error:\nMap must be close by walls");
+	return (i);
+}
+
 int main(int ac, char **av)
 {
-	char	*s;
-
 	if (ac == 2)
-		printf("%s\n", clean_string(av[1]));
+		printf("%ld\n", index_last_one_in_line(av[1]));
 	return (0);
 }

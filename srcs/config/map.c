@@ -21,7 +21,7 @@ static int		create_map(t_config *config)
 	if (!(map = (char **)malloc(sizeof(char *) * config->map->height + 1)))
 		return (0);
 	i = 0;
-	j = config->map->width + 2;
+	j = config->map->width + 1;
 	while (i < config->map->height + 1)
 	{
 		if (!(map[i] = (char *)malloc(sizeof(char *) * j)))
@@ -62,6 +62,48 @@ static void		copy_map(t_config *config, char *str_map)
 			c = 0;
 		}
 	}
+}
+
+static void		space_to_zero(t_config *config)
+{
+	int		line;
+	int		row;
+
+	line = 0;
+	while (line < config->map->height)
+	{
+		row = 0;
+		while (row < config->map->width)
+		{
+			if (config->map->map[line][row] == ' ')
+				config->map->map[line][row] == '0';
+			row++;
+		}
+		line++;
+	}
+}
+
+static int		map_validity(t_config *config)
+{
+	int		line;
+	int		row;
+
+	line = 1;
+	while (line < config->map->height)
+	{
+		if (!check_line(config, line))
+			return (0);
+		line++;
+	}
+	row = 1;
+	while (row < config->map-> height)
+	{
+		if (!check_row(config, row))
+			return (0);
+		row++;
+	}
+	space_to_zero(config);
+	return (1);
 }
 
 int				map_format(t_config *config, char *strmap)

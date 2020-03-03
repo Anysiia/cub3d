@@ -14,7 +14,6 @@
 
 static char	*clean_string(char *line)
 {
-	char	*clean;
 	int		len;
 	int		i;
 	int		j;
@@ -22,20 +21,17 @@ static char	*clean_string(char *line)
 	i = 0;
 	j = 0;
 	len = ft_strlen(line);
-	if (!(clean = (char *)malloc(sizeof(clean) * (len / 2 + 1))))
-		exit_error("Error:\nMalloc clean line of map");
-	while (line[i])
+	while (i < len)
 	{
 		if (!(ft_test_set(line[i], " NSEW012")))
 			exit_error("Error:\nInvalid character on map");
 		if (line[i + 1] != ' ' && line[i + 1] != '\0')
 			exit_error("Error:\nElement of map must be separated by one space");
-		clean[j] = line[i];
+		line[j] = line[i];
 		i += 2;
 		j++;
 	}
-	clean[i] = '\0';
-	free(line);
+	line[j] = '\0';
 	return (line);
 }
 
@@ -52,7 +48,7 @@ static void	line_map_save(char *line, char **map, t_config *config)
 	config->map->height++;
 	width = ft_strlen(clean_map);
 	if (config->map->height > 128 || width > 128)
-		exit_error("Error:\nMap is bigger than 128 * 128");
+		exit_error("Error:\nWidth or height of map are bigger than 128");
 	if (width > config->map->width)
 		config->map->width = width;
 	if (!(*map = ft_free_s1_join(*map, clean_map)))
