@@ -18,7 +18,7 @@ static size_t	index_last_one_in_row(t_config *config, int row)
 
 	i = 0;
 
-	while (i <config->map->height)
+	while (i < (size_t)config->map->height)
 		if (config->map->map[i][row])
 			i++;
 	i--;
@@ -34,7 +34,7 @@ static size_t	index_first_one_in_row(t_config *config, int row)
 	size_t	i;
 
 	i = 0;
-	while (config->map->map[i][row] && config->map->map[i][row] == ' ')
+	while (i < (size_t)config->map->height && config->map->map[i][row] == ' ')
 		i++;
 	if (config->map->map[i][row] != '1')
 		exit_error("Error:\nMap must be close by walls");

@@ -76,7 +76,7 @@ static void		space_to_zero(t_config *config)
 		while (row < config->map->width)
 		{
 			if (config->map->map[line][row] == ' ')
-				config->map->map[line][row] == '0';
+				config->map->map[line][row] = '0';
 			row++;
 		}
 		line++;

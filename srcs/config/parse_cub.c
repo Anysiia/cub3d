@@ -40,7 +40,8 @@ static void	line_map_save(char *line, char **map, t_config *config)
 	char	*clean_map;
 	int		width;
 
-	if (config->map->map_found == 1 && config->map->empty_line == 1 && line[0])
+	if (config->map->map_found == 1 && config->map->empty_line == 1 &&
+		(line[0] == '1' || line[0] == ' '))
 		exit_error("Error:\nInvalid map : empty line");
 	config->map->map_found = 1;
 	if (!(clean_map = clean_string(line)))
@@ -57,6 +58,19 @@ static void	line_map_save(char *line, char **map, t_config *config)
 		exit_error("Error:\nMalloc map error");
 }
 
+static int	is_one_in_line(const char *line)
+{
+	int		i;
+
+	while (line[i])
+	{
+		if (line[i] == '1')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 static void	config_map(char *line, t_config *config, char **map)
 {
 	int		i;
@@ -69,13 +83,13 @@ static void	config_map(char *line, t_config *config, char **map)
 		i++;
 	if (ft_test_set(line[i], "RNSWEFC"))
 		line = ft_free_strtrim(line, " ");
-	if (line[i] == 'R')
+	if (line[0] == 'R')
 		resolution(line, config);
-	if (ft_test_set(line[i], "NSWE"))
+	if (ft_test_set(line[0], "NSWE"))
 		texture_path(line, config);
-	if (line[i] == 'F')
+	if (line[0] == 'F')
 		color(line, config, 'F');
-	if (line[i] == 'C')
+	if (line[0] == 'C')
 		color(line, config, 'C');
 	if (line[i] == '1')
 		line_map_save(line, map, config);

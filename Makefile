@@ -30,7 +30,8 @@ SRCS =		srcs/cub3d.c \
 			srcs/config/player.c \
 			srcs/config/resolution.c \
 			srcs/config/texture.c \
-			srcs/config/map_validity.c \
+			srcs/config/line_map.c \
+			srcs/config/row_map.c \
 			srcs/engine/move_player.c \
 			srcs/engine/key_event.c \
 			srcs/engine/raycaster.c \

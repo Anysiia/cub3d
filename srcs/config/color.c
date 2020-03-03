@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-static int	check_color_line(char *str, char c)
+static int	check_color_line(char *str)
 {
 	int		i;
 
@@ -81,7 +81,7 @@ void		color(char *line, t_config *config, char c)
 	if (c == 'C')
 		if (config->ceiling != -1)
 			exit_error("Error:\nMore than one ceiling color");
-	if (!check_color_line(line, c))
+	if (!check_color_line(line))
 		exit_error("Error:\nWrong format color");
 	while (line[i] == ' ')
 		i++;
