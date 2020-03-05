@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 12:25:52 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/29 14:01:57 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/03/05 13:50:04 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		create_map(t_config *config)
 	int		j;
 	char	**map;
 
-	if (!(map = (char **)malloc(sizeof(char *) * config->map->height + 1)))
+	if (!(map = (char **)malloc(sizeof(char *) * (config->map->height + 2))))
 		return (0);
 	i = 0;
 	j = config->map->width + 2;
@@ -62,23 +62,17 @@ static void		copy_map(t_config *config, char *str_map)
 			c = 0;
 		}
 	}
+	free(str_map);
 }
 
 int				map_format(t_config *config, char *strmap)
 {
 	if (config->map->height < 3 || config->map->width < 3
 		|| config->map->height > 128 || config->map->width > 128)
-	{
-		free(strmap);
 		exit_error("Error:\nMap is too small");
-	}
 	if (!create_map(config))
-	{
-		free(strmap);
 		exit_error("Error:\nMalloc map");
-	}
 	copy_map(config, strmap);
-	free(strmap);
 	if (!map_validity(config))
 		exit_error("Error:\nMap must be close by walls");
 	find_player(config);

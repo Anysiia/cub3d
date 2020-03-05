@@ -6,13 +6,14 @@
 #    By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 09:57:43 by cmorel-a          #+#    #+#              #
-#    Updated: 2020/02/28 10:42:16 by cmorel-a         ###   ########.fr        #
+#    Updated: 2020/03/05 13:52:23 by cmorel-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		cub3d
 
-CFLAGS = 	-Wall -Werror -Wextra
+#CFLAGS = 	-g -fsanitize=address
+CFLAGS =	-Wall -Werror -Wextra
 
 MLX =		-lmlx -lm -framework OpenGL -framework AppKit -L $(MLX_PATH)
 
@@ -37,7 +38,7 @@ SRCS =		srcs/cub3d.c \
 			srcs/engine/scene.c \
 			srcs/engine/texture.c \
 			srcs/engine/sprite.c \
-			srcs/engine/utils_sprite.c \
+			srcs/engine/sort_sprite.c \
 			srcs/engine/save_bitmap.c
 
 OBJS = 		${SRCS:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:11:53 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/27 14:03:58 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/03/05 11:46:46 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ static int		check_path_format(char *str)
 		i++;
 	while (str[i] == ' ')
 		i++;
-	if (str[i] != '/' && (str[i] != '.' && str[i + 1] != '/'))
+	if (str[i] != '/' && str[i] != '.')
 		return (0);
 	i++;
 	while (ft_isprint(str[i]))
-		i++;
-	while (str[i] == ' ')
 		i++;
 	if (str[i] != '\0')
 		return (0);
@@ -44,6 +42,8 @@ static int		path_size(char *str)
 		i++;
 	while (ft_isprint(str[i]))
 	{
+		if (str[i] == ' ' && str[i - 1] != '\\')
+			return (len);
 		len++;
 		i++;
 	}
@@ -55,7 +55,7 @@ static int		check_texture(char *file, int witch_texture, t_config *config)
 	int		fd;
 
 	if (config->path_tex[witch_texture] != NULL)
-		exit_error("Error:\nTwo path for the same side texture or sprite");
+		exit_error("Error:\nTwo path for the same wall face or sprite");
 	if (!ft_type_file(file, ".xpm"))
 		exit_error("Error:\nTexture or sprite file is not an .xpm");
 	if ((fd = open(file, O_RDONLY)) == -1)

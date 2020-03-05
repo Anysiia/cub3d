@@ -6,13 +6,12 @@
 #    By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 14:38:15 by cmorel-a          #+#    #+#              #
-#    Updated: 2020/02/22 12:37:56 by cmorel-a         ###   ########.fr        #
+#    Updated: 2020/03/05 13:53:57 by cmorel-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-SRCS = ./ft_atoi.c \
-	./ft_bzero.c \
+SRCS = ./ft_bzero.c \
 	./ft_isdigit.c \
 	./ft_isprint.c \
 	./ft_split.c \
@@ -21,10 +20,8 @@ SRCS = ./ft_atoi.c \
 	./ft_strcmp.c \
 	./ft_strnew.c \
 	./ft_substr.c \
-	./ft_free_strtrim.c \
 	./ft_test_set.c \
 	./ft_type_file.c \
-	./ft_free_s1_join.c \
 	./gnl.c
 
 OBJS = ${SRCS:.c=.o}

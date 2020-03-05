@@ -6,77 +6,70 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 18:15:27 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/27 14:02:51 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/03/05 11:12:25 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int		only_char_in_line(const char *line, char c)
+static int		check_first_end_line(const char *line)
 {
 	int		i;
 
 	i = 0;
 	while (line[i] != '\0')
 	{
-		if (line[i] != c)
+		if (line[i] != '1' && line[i] != ' ')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-static int		verify_smaller_line(t_config *config,
-				int line, int len_line, int len_previous_line)
+static int		check_first_row(t_config *config)
 {
 	int		i;
 
-	i = len_line - 1;
-	while (i < len_previous_line)
+	i = 0;
+	while (i < config->map->height)
 	{
-		if (config->map->map[line - 1][i] != '1')
+		if (config->map->map[i][0] != '1' && config->map->map[i][0] != ' ')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-static int		verify_bigger_line(t_config *config,
-				int line, int len_line, int len_previous_line)
+static int		check_char_around(t_config *config, int line, int row)
 {
-	int		i;
-
-	i = len_previous_line - 1;
-	while (i < len_line)
-	{
-		if (config->map->map[line][i] != '1')
-			return (0);
-		i++;
-	}
+	if (!(ft_test_set(config->map->map[line - 1][row], "012NSWE"))
+		|| !(ft_test_set(config->map->map[line + 1][row], "012NSWE"))
+		|| !(ft_test_set(config->map->map[line][row - 1], "012NSWE"))
+		|| !(ft_test_set(config->map->map[line][row + 1], "012NSWE")))
+		return (0);
 	return (1);
 }
 
 int				map_validity(t_config *config)
 {
 	int		line;
-	int		len_line;
-	int		len_pr_line;
+	int		row;
 
-	if (!(only_char_in_line(config->map->map[0], '1')))
-		return (0);
-	if (!(only_char_in_line(config->map->map[config->map->height - 1], '1')))
+	if (!(check_first_end_line(config->map->map[0]))
+		|| !(check_first_end_line(config->map->map[config->map->height - 1]))
+		|| !(check_first_row(config)))
 		return (0);
 	line = 1;
-	while (line < config->map->height)
+	while (line < config->map->height - 1)
 	{
-		len_line = ft_strlen(config->map->map[line]);
-		len_pr_line = ft_strlen(config->map->map[line - 1]);
-		if (len_line < len_pr_line)
-			if (!verify_smaller_line(config, line, len_line, len_pr_line))
-				return (0);
-		if (len_line > len_pr_line)
-			if (!verify_bigger_line(config, line, len_line, len_pr_line))
-				return (0);
+		row = 1;
+		while (row < config->map->width)
+		{
+			if (ft_test_set(config->map->map[line][row], "02NSWE"))
+				if (!check_char_around(config, line, row))
+					exit_error("Error:\nMap must be close by walls");
+			row++;
+		}
 		line++;
 	}
 	return (1);

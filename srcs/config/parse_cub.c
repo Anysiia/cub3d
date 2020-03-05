@@ -6,62 +6,68 @@
 /*   By: cmorel-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:23:45 by cmorel-a          #+#    #+#             */
-/*   Updated: 2020/02/29 14:04:29 by cmorel-a         ###   ########.fr       */
+/*   Updated: 2020/03/05 12:45:00 by cmorel-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static char	*clean_string(char *line)
+static char		*join_map(char *s1, char const *s2)
 {
 	int		len;
 	int		i;
-	int		j;
+	char	*str;
 
-	i = 0;
-	j = 0;
-	len = ft_strlen(line);
-	while (line[i])
-	{
-		if (!(ft_test_set(line[i], " NSEW012")))
-			exit_error("Error:\nInvalid character on map");
-		if (line[i] == ' ')
-			i++;
-		else
-			line[j++] = line[i++];
-	}
-	if (line[j - 1] != '1')
+	if (!s1 || !s2)
 		return (NULL);
-	while (j < len)
-		line[j++] = '\0';
-	return (line);
+	i = ft_strlen(s1);
+	len = ft_strlen(s2);
+	len += i;
+	i = 0;
+	if (!(str = (char *)malloc(sizeof(*str) * (len + 2))))
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		str[i] = s1[i];
+	len = -1;
+	while (s2[++len])
+		str[i + len] = s2[len];
+	str[i + len] = '\n';
+	i++;
+	str[i + len] = '\0';
+	free(s1);
+	return (str);
 }
 
-static void	line_map_save(char *line, char **map, t_config *config)
+static void		line_map_save(char *line, char **map, t_config *config)
 {
-	char	*clean_map;
 	int		width;
+	int		i;
 
 	if (config->map->map_found == 1 && config->map->empty_line == 1 && line[0])
 		exit_error("Error:\nInvalid map : empty line");
 	config->map->map_found = 1;
-	if (!(clean_map = clean_string(line)))
-		exit_error("Error:\nMap must be close by walls");
+	i = 0;
+	while (line[i])
+	{
+		if (!(ft_test_set(line[i], " NSEW012")))
+			exit_error("Error:\nInvalid character on map");
+		i++;
+	}
 	config->map->height++;
-	width = ft_strlen(clean_map);
+	width = ft_strlen(line);
 	if (config->map->height > 128 || width > 128)
-		exit_error("Error:\nMap is bigger than 128 * 128");
+		exit_error("Error:\nMap is too big");
 	if (width > config->map->width)
 		config->map->width = width;
-	if (!(*map = ft_free_s1_join(*map, clean_map)))
-		exit_error("Error:\nMalloc map error");
-	if (!(*map = ft_free_s1_join(*map, "\n")))
+	if (!(*map = join_map(*map, line)))
 		exit_error("Error:\nMalloc map error");
 }
 
-static void	config_map(char *line, t_config *config, char **map)
+static void		config_map(char *line, t_config *config, char **map)
 {
-	if (config->map->map_found == 1 && line[0] != '\0' && line[0] != '1')
+	if (config->map->map_found == 1 && line[0] != '\0' && line[0] != '1'
+		&& line[0] != ' ')
 		exit_error("Error:\nInvalid character in map");
 	if (line[0] == 'R')
 		resolution(line, config);
@@ -71,13 +77,13 @@ static void	config_map(char *line, t_config *config, char **map)
 		color(line, config, 'F');
 	if (line[0] == 'C')
 		color(line, config, 'C');
-	if (line[0] == '1')
+	if (ft_test_set(line[0], "1 "))
 		line_map_save(line, map, config);
-	if ((ft_test_set(line[0], "RNSWESFC1") == 0) && line[0] != '\0')
-		exit_error("Error:\nInvalid character on .cub file");
+	if ((ft_test_set(line[0], "RNSWESFC1 ") == 0) && line[0] != '\0')
+		exit_error("Error:\nInvalid map or invalid caracter on .cub file");
 }
 
-char		*map_read_cub(const char *cub, t_config *config)
+char			*map_read_cub(const char *cub, t_config *config)
 {
 	int		fd;
 	char	*line;
@@ -90,7 +96,6 @@ char		*map_read_cub(const char *cub, t_config *config)
 		exit_error("Error:\nCannot malloc map string");
 	while ((res = get_next_line(fd, &line)) >= 0)
 	{
-		line = ft_free_strtrim(line, " ");
 		if (config->map->map_found == 1 && line[0] == '\0')
 			config->map->empty_line = 1;
 		config_map(line, config, &map);
