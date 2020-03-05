@@ -1,0 +1,23 @@
+R 800 600
+SO /Users/cmorel-a/cub3d/texture/marble1.xpm
+NO /Users/cmorel-a/cub3d/texture/marble2.xpm
+WE /Users/cmorel-a/cub3d/texture/marble3.xpm
+EA /Users/cmorel-a/cub3d/texture/marble4.xpm
+S /Users/cmorel-a/cub3d/texture/blue_trees.xpm
+F 255,204,153
+C 242,204,255
+
+111111111
+120000201
+100E00011
+10000211
+1020011
+100011
+10011
+1001
+1011
+10011
+120011
+100021
+111111
+

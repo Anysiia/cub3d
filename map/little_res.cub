@@ -1,0 +1,16 @@
+R 50 50
+NO /Users/cmorel-a/cub3d/texture/bricks1.xpm
+SO /Users/cmorel-a/cub3d/texture/bricks2.xpm
+WE /Users/cmorel-a/cub3d/texture/bricks3.xpm
+EA /Users/cmorel-a/cub3d/texture/bricks4.xpm
+S /Users/cmorel-a/cub3d/texture/blue_trees.xpm
+C 135,206,250
+F 42,163,42
+
+111111111
+100000001
+121002001
+100011101
+111112101
+1E0000001
+111111111
