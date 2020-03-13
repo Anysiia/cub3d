@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-# include "mlx.h"
+# include <SDL2/SDL.h>
 # include "../libft/libft.h"
 
 # define ESC		53

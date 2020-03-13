@@ -73,11 +73,16 @@ void		init_game(t_config *config)
 	int		i;
 
 	check_config(config);
-	if (!(config->init = mlx_init()))
+	if (!(config->init = SDL_Init(SDL_INIT_VIDEO)))
 		exit_error("Error:\nError on mlx_init");
-	if (!(config->window = mlx_new_window(config->init, config->width,
-			config->height, "cub3d")))
-		exit_error("Error:\nCannot create window with mlx");
+	if (!(config->window = SDL_CreateWindow(
+			"cub3d",
+			SDL_WINDOWPOS_UNDEFINED,
+			SDL_WINDOWPOS_UNDEFINED,
+			config->width,
+			config->height,
+			SDL_WINDOW_SHOWN)))
+		exit_error("Error:\nCannot create window with sdl");
 	i = 0;
 	while (i < NB_TEX)
 	{
